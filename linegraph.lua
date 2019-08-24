@@ -1,4 +1,3 @@
-
 tfm.exec.disableAutoNewGame(true)
 tfm.exec.disableAutoShaman(true)
 tfm.exec.disableAutoTimeLeft(true)
@@ -70,13 +69,14 @@ end
 function LineChart:show(target)
   ui.addTextArea(10000 + self.id, "", target, self.x, self.y, self.w, self.h, nil, nil, 0.5, true)
   local joints = 1
+  local xRatio = self.w / self.xRange
+  local yRatio = self.h / self.yRange
   for d = 1, #self.dataX, 1 do
     --local x1 = 
     tfm.exec.addJoint(10000 + joints ,-1,-1,{
       type=0,
-      point1= math.floor(self.dataX[d] * self.w / self.xRange  - (self.minX )) .. ",".. math.floor(invertY(self.dataY[d] * self.h / self.yRange) - self.minY),
-      point2=  math.floor((self.dataX[d+1]  or self.dataX[d]) * self.w / self.xRange - (self.minX)) .. "," .. math.floor(invertY((self.dataY[d+1] or self.dataY[d]) * self.h / self.yRange) - self.minY),
-      print(((self.dataY[d+1] or self.dataY[d])) * self.h / self.yRange),      frequency=10,
+      point1= math.floor(self.dataX[d] * xRatio  + (self.x)) .. ",".. math.floor(invertY(self.dataY[d] * yRatio) + self.y - self.h),
+      point2=  math.floor((self.dataX[d+1]  or self.dataX[d]) * xRatio + self.x) .. "," .. math.floor(invertY((self.dataY[d+1] or self.dataY[d]) * yRatio) + self.y - self.h),
       damping=0.2,
       line=3,
       color=0xFF6600,
@@ -87,6 +87,5 @@ function LineChart:show(target)
   end
 end
 
-local chart = LineChart(1, 50, 50, 600, 200, {100, 200, 300, 400, 500}, {100, 200, 300, 400, 500})
+local chart = LineChart(1, 50, 50, 600, 200, {0, 100, 200, 300, 400, 500}, {0, 100, 200, 300, 400, 500})
 chart:show()
-print()
