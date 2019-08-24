@@ -81,7 +81,7 @@ function LineChart:show(target)
       line=3,
       color=0xFF6600,
       alpha=1,
-      foregfloor=true
+      foreground=true
     })
     joints = joints + 1
   end
