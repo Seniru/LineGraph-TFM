@@ -1,9 +1,3 @@
-tfm.exec.disableAutoNewGame(true)
-tfm.exec.disableAutoShaman(true)
-tfm.exec.disableAutoTimeLeft(true)
-tfm.exec.disableAfkDeath(true)
-tfm.exec.newGame(7403725)
-
 tfm.exec.addPhysicObject(-1,400,-600,{type=0,width=10,height=10,foregfloor=true,friction=0.3,restitution=0,dynamic=false,miceCollision=true,gfloorCollision=true})
 
 function getMin(tbl)
@@ -56,7 +50,6 @@ function LineChart.new(id, x, y, w, h, dataX, dataY)
   self.h = h
   self.dataX = dataX
   self.dataY = dataY
-  print(self.dataY[1])
   self.minX = getMin(dataX)
   self.minY = getMin(self.dataY)
   self.maxX = getMax(dataX)
@@ -72,11 +65,10 @@ function LineChart:show(target)
   local xRatio = self.w / self.xRange
   local yRatio = self.h / self.yRange
   for d = 1, #self.dataX, 1 do
-    --local x1 = 
     tfm.exec.addJoint(10000 + joints ,-1,-1,{
       type=0,
-      point1= math.floor(self.dataX[d] * xRatio  + (self.x)) .. ",".. math.floor(invertY(self.dataY[d] * yRatio) + self.y - self.h),
-      point2=  math.floor((self.dataX[d+1]  or self.dataX[d]) * xRatio + self.x) .. "," .. math.floor(invertY((self.dataY[d+1] or self.dataY[d]) * yRatio) + self.y - self.h),
+      point1= math.floor(self.dataX[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. math.floor(invertY(self.dataY[d] * yRatio) + self.y - self.h + (self.minY * yRatio)),
+      point2=  math.floor((self.dataX[d+1]  or self.dataX[d]) * xRatio + self.x - (self.minX * xRatio)) .. "," .. math.floor(invertY((self.dataY[d+1] or self.dataY[d]) * yRatio) + self.y - self.h + (self.minY * yRatio)),
       damping=0.2,
       line=3,
       color=0xFF6600,
@@ -87,5 +79,12 @@ function LineChart:show(target)
   end
 end
 
-local chart = LineChart(1, 50, 50, 600, 200, {0, 100, 200, 300, 400, 500}, {0, 100, 200, 300, 400, 500})
+function f(n)
+  return math.sin(n)
+end
+
+local x = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5}
+local y = map(x, f)
+
+local chart = LineChart(1, 50, 50, 600, 200, x, y)
 chart:show()
