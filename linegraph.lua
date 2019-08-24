@@ -49,14 +49,7 @@ function LineChart.new(id, x, y, w, h, dataX, dataY)
   self.y = y
   self.w = w
   self.h = h
-  self.dataX = dataX
-  self.dataY = dataY
-  self.minX = getMin(dataX)
-  self.minY = getMin(self.dataY)
-  self.maxX = getMax(dataX)
-  self.maxY = getMax(dataY)
-  self.xRange = self.maxX - self.minX
-  self.yRange = self.maxY - self.minY
+  self:setData(dataX, dataY)
   self.joints = LineChart.__joints
   LineChart.__joints = LineChart.__joints + 10000
   print(LineChart.joints)
@@ -65,17 +58,17 @@ end
 
 function LineChart:show(target)
   --the graph plot
-  ui.addTextArea(10000 + self.id, "", target, self.x, self.y, self.w, self.h, nil, nil, 0.5, true)
+  ui.addTextArea(10000 + self.id, "", target, self.x, self.y, self.w, self.h, self.bg, self.border, self.alpha or 0.5, self.fixed)
   --label of the origin
-  ui.addTextArea(11000 + self.id, "<b>[" .. math.floor(self.minX) .. ", "  .. math.floor(self.minY) .. "]</b>", target, self.x - 15, self.y + self.h + 5, 50, 50, nil, nil, 0, true)
+  ui.addTextArea(11000 + self.id, "<b>[" .. math.floor(self.minX) .. ", "  .. math.floor(self.minY) .. "]</b>", target, self.x - 15, self.y + self.h + 5, 50, 50, nil, nil, 0, self.fixed)
   --label of the x max
-  ui.addTextArea(12000 + self.id, "<b>" .. math.ceil(self.maxX) .. "</b>", target, self.x + self.w + 10, self.y + self.h + 5, 50, 50, nil, nil, 0, true)
+  ui.addTextArea(12000 + self.id, "<b>" .. math.ceil(self.maxX) .. "</b>", target, self.x + self.w + 10, self.y + self.h + 5, 50, 50, nil, nil, 0, self.fixed)
   --label of the y max
-  ui.addTextArea(13000 + self.id, "<b>" .. math.ceil(self.maxY) .. "</b>", target, self.x - 15, self.y - 10, 50, 50, nil, nil, 0, true)
+  ui.addTextArea(13000 + self.id, "<b>" .. math.ceil(self.maxY) .. "</b>", target, self.x - 15, self.y - 10, 50, 50, nil, nil, 0, self.fixed)
   --label x median
-  ui.addTextArea(14000 + self.id, "<b>" .. math.ceil((self.maxX + self.minX) / 2) .. "</b>", target, self.x + (self.w - self.x) / 2, self.y + self.h + 5, 50, 50, nil, nil, 0, true)
+  ui.addTextArea(14000 + self.id, "<b>" .. math.ceil((self.maxX + self.minX) / 2) .. "</b>", target, self.x + (self.w - self.x) / 2, self.y + self.h + 5, 50, 50, nil, nil, 0, self.fixed)
   --label y median
-  ui.addTextArea(15000 + self.id, "<br><br><b>" .. math.ceil((self.maxY + self.minY) / 2) .. "</b>", target, self.x - 15, self.y + (self.h - self.y) / 2, 50, 50, nil, nil, 0, true)
+  ui.addTextArea(15000 + self.id, "<br><br><b>" .. math.ceil((self.maxY + self.minY) / 2) .. "</b>", target, self.x - 15, self.y + (self.h - self.y) / 2, 50, 50, nil, nil, 0, self.fixed)
 
   local joints = self.__joints
   local xRatio = self.w / self.xRange
@@ -86,11 +79,60 @@ function LineChart:show(target)
       point1= math.floor(self.dataX[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. math.floor(invertY(self.dataY[d] * yRatio) + self.y - self.h + (self.minY * yRatio)),
       point2=  math.floor((self.dataX[d+1]  or self.dataX[d]) * xRatio + self.x - (self.minX * xRatio)) .. "," .. math.floor(invertY((self.dataY[d+1] or self.dataY[d]) * yRatio) + self.y - self.h + (self.minY * yRatio)),
       damping=0.2,
-      line=3,
-      color=0xFF6600,
-      alpha=1,
+      line=self.lWidth or 3,
+      color=self.lineColor or 0xFF6600,
+      alpha=self.alpha or 1,
       foreground=true
     })
     joints = joints + 1
+  end
+end
+
+function LineChart:setLineColor(color)
+  self.lineColor = color
+end
+
+function LineChart:setGraphColor(bg, border)
+  self.bg = bg
+  self.border = border
+end
+
+function LineChart:setAlpha(alpha)
+  self.alpha = alpha
+end
+
+function LineChart:setFixedPosition(fixed)
+  self.fixed = fixed
+end
+
+function LineChart:setLineWidth(width)
+  self.lWidth = width
+end
+
+function LineChart:resize(w, h)
+  self.w = w
+  self.h = h
+end
+
+function LineChart:move(x, y)
+  self.x = x
+  self.y = y
+end
+
+function LineChart:setData(dx, dy)
+  if #dx ~= #dy then error("Ex[ected same number of data for both axis") end
+  self.dataX = dx
+  self.dataY = dy
+  self.minX = getMin(self.dataX)
+  self.minY = getMin(self.dataY)
+  self.maxX = getMax(self.dataX)
+  self.maxY = getMax(self.dataY)
+  self.xRange = self.maxX - self.minX
+  self.yRange = self.maxY - self.minY
+end
+
+function LineChart:hide(target)
+  for id = 10000, 16000, 1000 do
+    ui.removeTextArea(id + self.id, target)
   end
 end
