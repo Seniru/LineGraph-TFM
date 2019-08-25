@@ -1,5 +1,7 @@
 # LineGraph-TFM
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A library to use Line Graphs in Transformice
 
 ** Disclaimer! This repository is still in alpha. Contributions are welcome **
