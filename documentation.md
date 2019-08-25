@@ -47,5 +47,7 @@ Defines fields and methods to create and deal with Line graphs
 ### Extra methods
 
 `getMin(tbl)`: Returns the minimum value of the specified table `tbl`
+
 `getMax(tbl)`: Returns the maximum value of the speicified table `tbl`
+
 `map(tbl, f)`: Maps and returns the new table from specified table `tbl`, according to the function `f` provided
