@@ -50,11 +50,28 @@ function LineChart.new(id, x, y, w, h, dataX, dataY)
   self.w = w
   self.h = h
   self:setData(dataX, dataY)
+  self.showing = false
   self.joints = LineChart.__joints
   LineChart.__joints = LineChart.__joints + 10000
-  print(LineChart.joints)
   return self
 end
+
+--getters
+function LineChart:getId() return self.id end
+function LineChart:getDimension() return {x = self.x, y = self.y, w = self.w, h = self.h} end
+function LineChart:getData(axis) if axis == "x" then return self.dataX else return self.dataY end end
+function LineChart:getMinX() return self.minX end
+function LineChart:getMaxX() return self.maxX end
+function LineChart:getMinY() return self.minY end
+function LineChart:getMaxY() return self.maxY end
+function LineChart:getXRange() return self.xRange end
+function LineChart:getYRange() return self.yRange end
+function LineChart:getLineColor() return self.lineColor or 0xFF6600 end
+function LineChart:getGraphColor() return {bgColor = self.bg or 0x324650, borderColor = self.border or 0x212F36} end
+function LineChart:getAlpha() return self.alpha or 1 end
+function LineChart:isFixed() return not not self.fixed end
+function LineChart:getLineWidth() return self.lWidth or 0.3 end
+--function Linechart:isShowing() return self.showing end
 
 function LineChart:show()
   --the graph plot
@@ -74,7 +91,6 @@ function LineChart:show()
   local xRatio = self.w / self.xRange
   local yRatio = self.h / self.yRange
   for d = 1, #self.dataX, 1 do
-  print(self.id + joints)
     tfm.exec.addJoint(self.id + joints ,-1,-1,{
       type=0,
       point1= math.floor(self.dataX[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. math.floor(invertY(self.dataY[d] * yRatio) + self.y - self.h + (self.minY * yRatio)),
@@ -87,6 +103,7 @@ function LineChart:show()
     })
     joints = joints + 1
   end
+  self.showing = true
 end
 
 function LineChart:setLineColor(color)
@@ -140,4 +157,5 @@ function LineChart:hide()
   for d = self.joints, self.joints + #self.dataX, 1 do
     tfm.exec.removeJoint(d)
   end
+  self.showing = false
 end
