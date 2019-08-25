@@ -1,4 +1,4 @@
-tfm.exec.addPhysicObject(-1,400,-600,{type=0,width=10,height=10,foregfloor=true,friction=0.3,restitution=0,dynamic=false,miceCollision=true,gfloorCollision=true})
+tfm.exec.addPhysicObject(-1,400,-600,{type=0,width=10,height=10,foreground=true,friction=0.3,restitution=0,dynamic=false,miceCollision=true,groundCollision=true})
 
 function getMin(tbl)
   local min = tbl[1]
@@ -56,25 +56,26 @@ function LineChart.new(id, x, y, w, h, dataX, dataY)
   return self
 end
 
-function LineChart:show(target)
+function LineChart:show()
   --the graph plot
-  ui.addTextArea(10000 + self.id, "", target, self.x, self.y, self.w, self.h, self.bg, self.border, self.alpha or 0.5, self.fixed)
+  ui.addTextArea(10000 + self.id, "", nil, self.x, self.y, self.w, self.h, self.bg, self.border, self.alpha or 0.5, self.fixed)
   --label of the origin
-  ui.addTextArea(11000 + self.id, "<b>[" .. math.floor(self.minX) .. ", "  .. math.floor(self.minY) .. "]</b>", target, self.x - 15, self.y + self.h + 5, 50, 50, nil, nil, 0, self.fixed)
+  ui.addTextArea(11000 + self.id, "<b>[" .. math.floor(self.minX) .. ", "  .. math.floor(self.minY) .. "]</b>", nil, self.x - 15, self.y + self.h + 5, 50, 50, nil, nil, 0, self.fixed)
   --label of the x max
-  ui.addTextArea(12000 + self.id, "<b>" .. math.ceil(self.maxX) .. "</b>", target, self.x + self.w + 10, self.y + self.h + 5, 50, 50, nil, nil, 0, self.fixed)
+  ui.addTextArea(12000 + self.id, "<b>" .. math.ceil(self.maxX) .. "</b>", nil, self.x + self.w + 10, self.y + self.h + 5, 50, 50, nil, nil, 0, self.fixed)
   --label of the y max
-  ui.addTextArea(13000 + self.id, "<b>" .. math.ceil(self.maxY) .. "</b>", target, self.x - 15, self.y - 10, 50, 50, nil, nil, 0, self.fixed)
+  ui.addTextArea(13000 + self.id, "<b>" .. math.ceil(self.maxY) .. "</b>", nil, self.x - 15, self.y - 10, 50, 50, nil, nil, 0, self.fixed)
   --label x median
-  ui.addTextArea(14000 + self.id, "<b>" .. math.ceil((self.maxX + self.minX) / 2) .. "</b>", target, self.x + (self.w - self.x) / 2, self.y + self.h + 5, 50, 50, nil, nil, 0, self.fixed)
+  ui.addTextArea(14000 + self.id, "<b>" .. math.ceil((self.maxX + self.minX) / 2) .. "</b>", nil, self.x + self.w / 2, self.y + self.h + 5, 50, 50, nil, nil, 0, self.fixed)
   --label y median
-  ui.addTextArea(15000 + self.id, "<br><br><b>" .. math.ceil((self.maxY + self.minY) / 2) .. "</b>", target, self.x - 15, self.y + (self.h - self.y) / 2, 50, 50, nil, nil, 0, self.fixed)
+  ui.addTextArea(15000 + self.id, "<br><br><b>" .. math.ceil((self.maxY + self.minY) / 2) .. "</b>", nil, self.x - 15, self.y + (self.h - self.y) / 2, 50, 50, nil, nil, 0, self.fixed)
 
-  local joints = self.__joints
+  local joints = self.joints
   local xRatio = self.w / self.xRange
   local yRatio = self.h / self.yRange
   for d = 1, #self.dataX, 1 do
-    tfm.exec.addJoint(10000 + self.id + joints ,-1,-1,{
+  print(self.id + joints)
+    tfm.exec.addJoint(self.id + joints ,-1,-1,{
       type=0,
       point1= math.floor(self.dataX[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. math.floor(invertY(self.dataY[d] * yRatio) + self.y - self.h + (self.minY * yRatio)),
       point2=  math.floor((self.dataX[d+1]  or self.dataX[d]) * xRatio + self.x - (self.minX * xRatio)) .. "," .. math.floor(invertY((self.dataY[d+1] or self.dataY[d]) * yRatio) + self.y - self.h + (self.minY * yRatio)),
@@ -131,8 +132,12 @@ function LineChart:setData(dx, dy)
   self.yRange = self.maxY - self.minY
 end
 
-function LineChart:hide(target)
+function LineChart:hide()
   for id = 10000, 16000, 1000 do
-    ui.removeTextArea(id + self.id, target)
+    ui.removeTextArea(id + self.id)
+  end
+
+  for d = self.joints, self.joints + #self.dataX, 1 do
+    tfm.exec.removeJoint(d)
   end
 end
