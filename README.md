@@ -1,10 +1,34 @@
-# LineGraph-TFM
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A library to use Line Graphs in Transformice
+<h1 align='center'>LineGraph-TFM</h1>
+<p align='center'><a href="https://ibb.co/d2vWYHC"><img src="https://i.ibb.co/d2vWYHC/graph.png" alt="graph" border="0" width="90%" height="250"></a></p>
+<p align='center'> 
+ Lite, Reusable and customizable line charts for Transformice!
+ <br> <a href='#contributors'><img src='https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square' alt='All Contributors'></a>
+  <a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/License-MIT-yellow.svg' alt='License'></a><br> 
+</p>
 
-** Disclaimer! This repository is still in alpha. Contributions are welcome **
+### Features
+- Reusable
+- Lightweight
+- Customizable
+- Real time!
+- Class based
+- Easy
+
+### Usage
+```lua
+--insert the library code before the script
+--then just call LineChart(id, x, y, w, h, dataX, dataY) to create a new chart
+chart = LineChart(1, 200, 50, 400, 200, {-3, -2, -1, 0, 1, 2, 3}, {-3, -2, -1, 0, 1, 2, 3})
+--display the chart
+chart:show()
+-- this should show a linear chart ...
+```
+Check the [documentation](https://github.com/Seniru/LineGraph-TFM/blob/master/documentation.md) for more
+
+### Demos
+
+To be continued...
 
 ## Contributors ✨
 
