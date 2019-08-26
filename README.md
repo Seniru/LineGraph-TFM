@@ -28,7 +28,54 @@ Check the [documentation](https://github.com/Seniru/LineGraph-TFM/blob/master/do
 
 ### Demos
 
-To be continued...
+
+$$y = tan  \ x$$
+```lua
+x = range(-5, 5, 0.5)
+y = map(x, function(x) return math.tan(x) end)
+
+chart = LineChart(1, 200, 50, 400, 200, x, y) --instantiation
+chart:setLineColor(0xFFCC00) --sets the line color to yellowish-orange
+chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
+chart:show() --display the chart
+```
+<p align='center'>
+<a href="https://ibb.co/609mvks"><img src="https://i.ibb.co/609mvks/graph2.png" alt="graph2" border="0" width=95% height=250></a>
+</p>
+<hr>
+
+$$y = 2x^2$$
+```lua
+x = range(-5, 5, 0.5)
+y = map(x, function(x) return 2 * x * x end)
+
+chart = LineChart(1, 200, 50, 400, 200, x, y) --instantiation
+chart:setLineColor(0xCC89FF) --sets the line color to purple
+chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
+chart:show() --display the chart
+```
+<p align='center'><img src='https://i.imgur.com/TulCY9W.png' width=95% height=250></p>
+<hr>
+
+Real time Graphs! $sin(x) \times x ^2 \times tanh(x)$
+```lua
+chart = LineChart(1, 200, 50, 400, 200, {0}, {0}) --instantiation
+chart:setLineColor(0xDD32CC) --sets the line color to pink
+chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
+
+currX = 0
+--the real time mageic is here!
+function eventLoop(l, r)
+	local x = range(currX, currX + 10, 0.1) --creates the x coordinates
+	local y = map(x, function(x) return  math.sin(x) * x * x * math.tanh(x) end ) --maps x values to the specified function
+	chart:setData(x,y) -- sets the new data to the graph
+	chart:show() --displays it
+	currX = currX + 0.5 --this cause x coordinate to move by 0.5 every 500ms
+end
+```
+<p align='center'>
+	<img src='https://media.giphy.com/media/ZbSt4f4p32yU0est9S/giphy.gif' width=95% height=250>
+</p>
 
 ## Contributors ✨
 
