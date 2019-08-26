@@ -1,9 +1,0 @@
-language: javascript 
-
-before-install:
- - npm install -g luamin
-
-jobs:
- include:
-  stage: deploy
-    script: luamin -f linegraph.lua
