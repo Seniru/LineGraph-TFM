@@ -29,7 +29,8 @@ Check the [documentation](https://github.com/Seniru/LineGraph-TFM/blob/master/do
 ### Demos
 
 
-$$y = tan  \ x$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=y&space;=&space;tan\&space;x" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y&space;=&space;tan\&space;x" title="y = tan\ x" /></a>
+
 ```lua
 x = range(-5, 5, 0.5)
 y = map(x, function(x) return math.tan(x) end)
@@ -44,7 +45,8 @@ chart:show() --display the chart
 </p>
 <hr>
 
-$$y = 2x^2$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;y&space;=&space;2x^2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;y&space;=&space;2x^2" title="y = 2x^2" /></a>
+
 ```lua
 x = range(-5, 5, 0.5)
 y = map(x, function(x) return 2 * x * x end)
@@ -57,7 +59,7 @@ chart:show() --display the chart
 <p align='center'><img src='https://i.imgur.com/TulCY9W.png' width=95% height=250></p>
 <hr>
 
-Real time Graphs! $sin(x) \times x ^2 \times tanh(x)$
+Real time Graphs! <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;sin(x)&space;\times&space;x&space;^2&space;\times&space;tanh(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;sin(x)&space;\times&space;x&space;^2&space;\times&space;tanh(x)" title="sin(x) \times x ^2 \times tanh(x)" /></a>
 ```lua
 chart = LineChart(1, 200, 50, 400, 200, {0}, {0}) --instantiation
 chart:setLineColor(0xDD32CC) --sets the line color to pink
