@@ -34,7 +34,7 @@ end
 
 local range
 do
-	local nsert = table.insert
+	local insert = table.insert
 	function range(from, to, step)
 		local res = { }
 		for i = from, to, step do
