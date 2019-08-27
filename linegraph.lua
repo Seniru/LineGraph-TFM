@@ -50,7 +50,7 @@ end
 
 local LineChart = {}
 LineChart.__index = LineChart
-LineChart.__joints = 10000
+LineChart._joints = 10000
 
 setmetatable(LineChart, {
 	__call = function (cls, ...)
@@ -67,8 +67,8 @@ function LineChart.new(id, x, y, w, h, dataX, dataY)
 	self.h = h
 	self:setData(dataX, dataY)
 	self.showing = false
-	self.joints = LineChart.__joints
-	LineChart.__joints = LineChart.__joints + 10000
+	self.joints = LineChart._joints
+	LineChart._joints = LineChart._joints + 10000
 	return self
 end
 
