@@ -1,6 +1,6 @@
 
 <h1 align='center'>LineGraph-TFM</h1>
-<p align='center'><a href="https://ibb.co/d2vWYHC"><img src="https://i.ibb.co/d2vWYHC/graph.png" alt="graph" border="0" width="90%" height="250"></a></p>
+<p align='center'><a href="https://ibb.co/d2vWYHC"><img src="https://i.ibb.co/cF9gnsf/graph.png" alt="graph" border="0" width="90%" height="250"></a></p>
 <p align='center'> 
  Lite, Reusable and customizable line charts for Transformice!
  <br> <a href='#contributors'><img src='https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square' alt='All Contributors'></a>
@@ -43,7 +43,7 @@ chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
 chart:show() --display the chart
 ```
 <p align='center'>
-<a href="https://ibb.co/609mvks"><img src="https://i.ibb.co/609mvks/graph2.png" alt="graph2" border="0" width=95% height=250></a>
+<a href="https://ibb.co/609mvks"><img src="https://i.ibb.co/1GyLsk2/graph2.png" alt="graph2" border="0" width=95% height=250></a>
 </p>
 <hr>
 
