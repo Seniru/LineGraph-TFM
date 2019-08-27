@@ -1,6 +1,7 @@
 eventNewGame = function()
 	tfm.exec.addPhysicObject(-1, 0, 0, { type = 14, miceCollision = false, groundCollision = false })
 end
+eventNewGame()
 
 local function getMin(tbl)
 	local min = tbl[1]
