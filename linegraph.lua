@@ -28,6 +28,12 @@ function map(tbl, f)
   return res
 end
 
+function range(from, to, step)
+	res = {}
+	for i = from, to, step do table.insert(res, i) end
+	return res
+end
+
 function invertY(y)
   return 400 - y
 end
@@ -93,8 +99,9 @@ function LineChart:show()
   for d = 1, #self.dataX, 1 do
     tfm.exec.addJoint(self.id + joints ,-1,-1,{
       type=0,
-      point1= math.floor(self.dataX[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. math.floor(invertY(self.dataY[d] * yRatio) + self.y - self.h + (self.minY * yRatio)),
-      point2=  math.floor((self.dataX[d+1]  or self.dataX[d]) * xRatio + self.x - (self.minX * xRatio)) .. "," .. math.floor(invertY((self.dataY[d+1] or self.dataY[d]) * yRatio) + self.y - self.h + (self.minY * yRatio)),
+      point1= math.floor(
+        self.dataX[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. math.floor(invertY(self.dataY[d] * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
+      point2=  math.floor((self.dataX[d+1]  or self.dataX[d]) * xRatio + self.x - (self.minX * xRatio)) .. "," .. math.floor(invertY((self.dataY[d+1] or self.dataY[d]) * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
       damping=0.2,
       line=self.lWidth or 3,
       color=self.lineColor or 0xFF6600,
