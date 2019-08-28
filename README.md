@@ -90,6 +90,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/Seniru"><img src="https://avatars2.githubusercontent.com/u/34127015?v=4" width="100px;" alt="Seniru Pasan Indira"/><br /><sub><b>Seniru Pasan Indira</b></sub></a><br /><a href="https://github.com/Seniru/LineGraph-TFM/commits?author=Seniru" title="Code">💻</a> <a href="https://github.com/Seniru/LineGraph-TFM/commits?author=Seniru" title="Documentation">📖</a> <a href="#design-Seniru" title="Design">🎨</a></td>
+    <td align="center"><a href="http://bit.ly/laut-id"><img src="https://avatars2.githubusercontent.com/u/26045253?v=4" width="100px;" alt="Lautenschlager"/><br /><sub><b>Lautenschlager</b></sub></a><br /><a href="https://github.com/Seniru/LineGraph-TFM/commits?author=Lautenschlager-id" title="Code">💻</a></td>
   </tr>
 </table>
 
