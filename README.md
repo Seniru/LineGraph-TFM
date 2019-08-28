@@ -3,7 +3,7 @@
 <p align='center'><a href="https://ibb.co/d2vWYHC"><img src="https://i.ibb.co/cF9gnsf/graph.png" alt="graph" border="0" width="90%" height="250"></a></p>
 <p align='center'> 
  Lite, Reusable and customizable line charts for Transformice!
- <br> <a href='#contributors'><img src='https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square' alt='All Contributors'></a>
+ <br> <a href='#contributors'><img src='https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square' alt='All Contributors'></a>
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Seniru/LineGraph-TFM">
   <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/Seniru/LineGraph-TFM?sort=semver">
   <a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/License-MIT-yellow.svg' alt='License'></a><br> 
@@ -90,6 +90,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/Seniru"><img src="https://avatars2.githubusercontent.com/u/34127015?v=4" width="100px;" alt="Seniru Pasan Indira"/><br /><sub><b>Seniru Pasan Indira</b></sub></a><br /><a href="https://github.com/Seniru/LineGraph-TFM/commits?author=Seniru" title="Code">💻</a> <a href="https://github.com/Seniru/LineGraph-TFM/commits?author=Seniru" title="Documentation">📖</a> <a href="#design-Seniru" title="Design">🎨</a></td>
+    <td align="center"><a href="http://bit.ly/laut-id"><img src="https://avatars2.githubusercontent.com/u/26045253?v=4" width="100px;" alt="Lautenschlager"/><br /><sub><b>Lautenschlager</b></sub></a><br /><a href="https://github.com/Seniru/LineGraph-TFM/commits?author=Lautenschlager-id" title="Code">💻</a></td>
   </tr>
 </table>
 
