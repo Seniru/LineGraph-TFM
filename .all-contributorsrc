@@ -15,6 +15,15 @@
         "doc",
         "design"
       ]
+    },
+    {
+      "login": "Lautenschlager-id",
+      "name": "Lautenschlager",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/26045253?v=4",
+      "profile": "http://bit.ly/laut-id",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
