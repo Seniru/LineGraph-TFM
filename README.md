@@ -20,6 +20,8 @@
 ### Usage
 ```lua
 --insert the library code before the script
+--then call LineChart.init()
+LineChart.init()
 --then just call LineChart(id, x, y, w, h, dataX, dataY) to create a new chart
 chart = LineChart(1, 200, 50, 400, 200, {-3, -2, -1, 0, 1, 2, 3}, {-3, -2, -1, 0, 1, 2, 3})
 --display the chart
