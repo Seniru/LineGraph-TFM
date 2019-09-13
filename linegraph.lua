@@ -85,7 +85,7 @@ function LineChart:getGraphColor() return { bgColor = self.bg or 0x324650, borde
 function LineChart:getAlpha() return self.alpha or 1 end
 function LineChart:isFixed() return not not self.fixed end
 function LineChart:getLineWidth() return self.lWidth or 0.3 end
-function Linechart:isShowing() return self.showing end
+function LineChart:isShowing() return self.showing end
 	
 function LineChart:show()
     local floor, ceil = math.floor, math.ceil
