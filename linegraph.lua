@@ -56,17 +56,17 @@ function LineChart.init()
     tfm.exec.addPhysicObject(-1, 0, 0, { type = 14, miceCollision = false, groundCollision = false })
 end
 
-function LineChart.new(id, x, y, w, h, dataX, dataY)
+function LineChart.new(id, x, y, w, h)
 	local self = setmetatable({ }, LineChart)
 	self.id = id
 	self.x = x
 	self.y = y
 	self.w = w
 	self.h = h
-	self:setData(dataX, dataY)
 	self.showing = false
 	self.joints = LineChart._joints
 	LineChart._joints = LineChart._joints + 10000
+  self.series = { }
 	return self
 end
 
@@ -105,7 +105,7 @@ function LineChart:show()
 	local joints = self.joints
 	local xRatio = self.w / self.xRange
 	local yRatio = self.h / self.yRange
-	for d = 1, #self.dataX, 1 do
+	--[[for d = 1, #self.dataX, 1 do
 		tfm.exec.addJoint(self.id + joints ,-1,-1,{
 			type=0,
 			point1= floor(self.dataX[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. floor(invertY(self.dataY[d] * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
@@ -117,7 +117,24 @@ function LineChart:show()
 			foreground=true
 		})
 		joints = joints + 1
-	end
+	end]]
+
+  for id, series in next, self.series do
+    for d = 1, #series[1], 1 do
+		tfm.exec.addJoint(self.id + joints ,-1,-1,{
+			type=0,
+			point1= floor(series[1][d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. floor(invertY(series[2][d] * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
+			point2=  floor((series[1][d+1]  or series[1][d]) * xRatio + self.x - (self.minX * xRatio)) .. "," .. floor(invertY((series[2][d+1] or series[2][d]) * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
+			damping=0.2,
+			line=self.lWidth or 3,
+			color=self.lineColor or 0xFF6600,
+			alpha=self.alpha or 1,
+			foreground=true
+		})
+		joints = joints + 1
+	  end
+  end
+
 	self.showing = true
 end
 
@@ -142,6 +159,17 @@ function LineChart:setLineWidth(width)
 	self.lWidth = width
 end
 
+function LineChart:addSeries(dx, dy)
+  assert(#dx == #dy, "Expected same number of data for both axis")
+  table.insert(self.series, {dx, dy})
+  self.minX = getMin(dx) < (self.minX or 0) and getMin(dx) or self.minX
+  self.minY = getMin(dy) < (self.minY or 0) and getMin(dy) or self.minY
+  self.maxX = getMax(dx) > (self.maxX or 0) and getMax(dx) or self.maxX
+  self.maxY = getMax(dy) > (self.maxY or 0) and getMax(dy) or self.maxY
+  self.xRange = self.maxX - self.minX
+  self.yRange = self.maxY - self.minY
+end
+
 function LineChart:resize(w, h)
 	self.w = w
 	self.h = h
@@ -152,17 +180,6 @@ function LineChart:move(x, y)
 	self.y = y
 end
 
-function LineChart:setData(dx, dy)
-	assert(#dx == #dy, "Expected same number of data for both axis")
-	self.dataX = dx
-	self.dataY = dy
-	self.minX = getMin(self.dataX)
-	self.minY = getMin(self.dataY)
-	self.maxX = getMax(self.dataX)
-	self.maxY = getMax(self.dataY)
-	self.xRange = self.maxX - self.minX
-	self.yRange = self.maxY - self.minY
-end
 
 function LineChart:hide()
 	for id = 10000, 16000, 1000 do
@@ -174,3 +191,21 @@ function LineChart:hide()
 	end
 	self.showing = false
 end
+
+x = range(-5, 5, 0.5)
+y = map(x, function(x) return math.tan(x) end)
+x1 = range(-5, 5, 0.5)
+y1 = map(x, function(x) return 2 * x * x end)
+x3 = range(currX, currX + 10, 0.1) --creates the x coordinates
+y3 = map(x, function(x) return  math.sin(x) * x * x * math.tanh(x) end ) --maps x values to the specified function
+
+LineChart.init()
+
+chart = LineChart(1, 200, 50, 400, 200) --instantiation
+chart:setLineColor(0xFFCC00) --sets the line color to yellowish-orange
+chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
+chart:addSeries(x, y)
+chart:addSeries(x1, y1)
+chart:addSeries(x3, y3)
+chart:show() --display the chart
+print("new version")
