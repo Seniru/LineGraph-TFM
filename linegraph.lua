@@ -80,10 +80,10 @@ end
 function Series:setData(dx, dy)
   self.dx = dx
   self.dy = dy
-  self.minX = math.min(getMin(dx), self.minX or 0)
-  self.minY = math.min(getMin(dy), self.minY or 0)
-  self.maxX = math.max(getMax(dx), self.maxX or 0)
-  self.maxY = math.max(getMax(dy), self.maxY or 0)
+  self.minX = getMin(dx)
+  self.minY = getMin(dy)
+  self.maxX = getMax(dx)
+  self.maxY = getMax(dy)
 end
 
 function Series:setColor(col)
@@ -145,6 +145,7 @@ function LineChart:getDataLength()
 end
 	
 function LineChart:show()
+    self:refresh()
     local floor, ceil = math.floor, math.ceil
 	--the graph plot
 	ui.addTextArea(10000 + self.id, "", nil, self.x, self.y, self.w, self.h, self.bg, self.border, self.alpha or 0.5, true)
@@ -193,12 +194,31 @@ end
 
 function LineChart:addSeries(series)
   table.insert(self.series, series)
-  self.minX = math.min(series:getMinX(), self.minX or 0)
-  self.minY = math.min(series:getMinY(), self.minY or 0)
-  self.maxX = math.max(series:getMaxX(), self.maxX or 0)
-  self.maxY = math.max(series:getMaxY(), self.maxY or 0)
-  self.xRange = self.maxX - self.minX
-  self.yRange = self.maxY - self.minY
+  self:refresh()
+end
+
+function LineChart:removeSeries(name)
+  for i=1, #series do
+    if self.series[i]:getName() == name then
+      table.remove(self.series, i)
+      break
+    end
+  end
+  self:refresh()
+end
+
+function LineChart:refresh()
+  self.minX, self.minY, self.maxX, self.maxY = nil
+  for k, s in next, self.series do
+    self.minX = math.min(s:getMinX(), self.minX or s:getMinX())
+    self.minY = math.min(s:getMinY(), self.minY or s:getMinY())
+    self.maxX = math.max(s:getMaxX(), self.maxX or s:getMaxX())
+    self.maxY = math.max(s:getMaxY(), self.maxY or s:getMaxY())
+  end
+    self.xRange = self.maxX - self.minX
+    self.yRange = self.maxY - self.minY
+
+  print("New call: \n minX: " .. self.minX .. "\n minY: " .. self.minY .. "\n maxX: " .. self.maxX .. "\n maxY: " .. self.maxY)
 end
 
 function LineChart:resize(w, h)
@@ -212,7 +232,7 @@ function LineChart:move(x, y)
 end
 
 function LineChart:hide()
-	for id = 10000, 16000, 1000 do
+	for id = 10000, 17000, 1000 do
 		ui.removeTextArea(id + self.id) 
 	end
 	for d = self.joints, self.joints + self:getDataLength(), 1 do
@@ -221,18 +241,30 @@ function LineChart:hide()
 	self.showing = false
 end
 
-x = range(-5, 5, 0.5)
-y = map(x, function(x) return math.tan(x) end)
-y2 = map(x, function(x) return math.cos(x) end)
+--[[function LineChart:showLabels(show)
+  local labels = ""
+  for _, series in next, self.series do
+    lables = labels .. "<font color='#" .. 
+  end
+  ui.addTextArea(16000 + self.id, )
+end]]
+
+x1 = range(-5, 5, 1)
+y1 = map(x1, function(x) return math.tan(x) end)
 LineChart.init()
-series1 = Series(x, y, "s1")
-series2 = Series(x, y2, "s2")
-series2:setColor(0xFF0000)
-series2:setLineWidth(5)
+series1 = Series(x1, x1, "s1")
 chart = LineChart(1, 200, 50, 400, 200) --instantiation
 chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
 chart:addSeries(series1)
-chart:addSeries(series2)
---chart:addSeries(x1, y1)
---chart:addSeries(x3, y3)
-chart:show() --display the chart
+chart:show()
+i = -5
+function eventLoop(tr, ti)
+  i = i + 1
+  local x = range(i, i+10, 0.5)
+  local y = map(x, function(x) return math.tan(x) end)
+  series1:setData(x, y)
+  --chart:refresh()
+  chart:show()
+
+end
+
