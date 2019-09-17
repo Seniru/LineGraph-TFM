@@ -1,3 +1,16 @@
+--credits: https://snipplr.com/view/13086/number-to-hex/
+--modified by me
+local hexstr = '0123456789abcdef'
+local function num2hex(num)
+    local s = ''
+    while num > 0 do
+        local mod = math.fmod(num, 16)
+        s = string.sub(hexstr, mod+1, mod+1) .. s
+        num = math.floor(num / 16)
+    end
+    return string.upper(s == '' and '0' or s)
+end
+
 local function getMin(tbl)
 	local min = tbl[1]
 	for v = 1, #tbl do
@@ -134,7 +147,7 @@ function LineChart:getMaxY() return self.maxY end
 function LineChart:getXRange() return self.xRange end
 function LineChart:getYRange() return self.yRange end
 function LineChart:getGraphColor() return { bgColor = self.bg or 0x324650, borderColor = self.border or 0x212F36 } end
-function LineChart:getAlpha() return self.alpha or 1 end
+function LineChart:getAlpha() return self.alpha or 0.5 end
 function LineChart:isShowing() return self.showing end
 function LineChart:getDataLength()
   local count = 0
@@ -148,7 +161,7 @@ function LineChart:show()
     self:refresh()
     local floor, ceil = math.floor, math.ceil
 	--the graph plot
-	ui.addTextArea(10000 + self.id, "", nil, self.x, self.y, self.w, self.h, self.bg, self.border, self.alpha or 0.5, true)
+	ui.addTextArea(10000 + self.id, "", nil, self.x, self.y, self.w, self.h, self.bg, self.border, self:getAlpha(), true)
 	--label of the origin
 	ui.addTextArea(11000 + self.id, "<b>[" .. floor(self.minX) .. ", "  .. floor(self.minY) .. "]</b>", nil, self.x - 15, self.y + self.h + 5, 50, 50, nil, nil, 0, true)
 	--label of the x max
@@ -172,7 +185,7 @@ function LineChart:show()
 			damping=0.2,
 			line=series:getLineWidth(),
 			color=series:getColor(),
-			alpha=self.alpha or 1,
+			alpha=1,
 			foreground=true
 		})
 		joints = joints + 1
@@ -198,7 +211,7 @@ function LineChart:addSeries(series)
 end
 
 function LineChart:removeSeries(name)
-  for i=1, #series do
+  for i=1, #self.series do
     if self.series[i]:getName() == name then
       table.remove(self.series, i)
       break
@@ -217,8 +230,6 @@ function LineChart:refresh()
   end
     self.xRange = self.maxX - self.minX
     self.yRange = self.maxY - self.minY
-
-  print("New call: \n minX: " .. self.minX .. "\n minY: " .. self.minY .. "\n maxX: " .. self.maxX .. "\n maxY: " .. self.maxY)
 end
 
 function LineChart:resize(w, h)
@@ -241,30 +252,14 @@ function LineChart:hide()
 	self.showing = false
 end
 
---[[function LineChart:showLabels(show)
+function LineChart:showLabels(show)
+  if show or show == nil then
   local labels = ""
-  for _, series in next, self.series do
-    lables = labels .. "<font color='#" .. 
+    for _, series in next, self.series do
+      labels = labels .. "<font color='#" .. num2hex(series:getColor()) .. "'> ▉<b> " .. series:getName() .. "</b></font><br>"
+    end
+    ui.addTextArea(16000 + self.id, labels, nil, self.x + self.w + 15, self.y, 80, 18 * #self.series, self:getGraphColor().bgColor, self:getGraphColor().borderColor, self:getAlpha(), true )
+  else 
+    ui.removeTextArea(16000 + self.id, nil)
   end
-  ui.addTextArea(16000 + self.id, )
-end]]
-
-x1 = range(-5, 5, 1)
-y1 = map(x1, function(x) return math.tan(x) end)
-LineChart.init()
-series1 = Series(x1, x1, "s1")
-chart = LineChart(1, 200, 50, 400, 200) --instantiation
-chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
-chart:addSeries(series1)
-chart:show()
-i = -5
-function eventLoop(tr, ti)
-  i = i + 1
-  local x = range(i, i+10, 0.5)
-  local y = map(x, function(x) return math.tan(x) end)
-  series1:setData(x, y)
-  --chart:refresh()
-  chart:show()
-
 end
-
