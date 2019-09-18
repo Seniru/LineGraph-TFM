@@ -1,5 +1,19 @@
+## class `Series`
+This class is to hold data and methods that could be display in a line chart.
+
+
 ## class `LineChart`
 Defines fields and methods to create and deal with Line graphs 
+
+### Class methods
+
+**`Series.new(dx, dy, name, col)`**
+ - Creates a new instance of a Series
+ - Parameters
+  - **dx** *(number[])*: `x` data
+  - **dy** *(number[])*: `y` data
+  - **name** *(string)*: The name of the series
+  - **col** *(number)*: The color of the Series. May specified as a hexadecimal value.
 
 ### Class methods
 
@@ -51,3 +65,5 @@ Defines fields and methods to create and deal with Line graphs
 `getMax(tbl)`: Returns the maximum value of the speicified table `tbl`
 
 `map(tbl, f)`: Maps and returns the new table from specified table `tbl`, according to the function `f` provided
+
+`range(from, to, step)`: Generates and returns a sequence of numbers from `from` to `to` with an interval of `step`
