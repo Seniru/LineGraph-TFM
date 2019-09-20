@@ -67,3 +67,6 @@ Defines fields and methods to create and deal with Line graphs
 `map(tbl, f)`: Maps and returns the new table from specified table `tbl`, according to the function `f` provided
 
 `range(from, to, step)`: Generates and returns a sequence of numbers from `from` to `to` with an interval of `step`
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTUxMTk5MjM4M119
+-->
