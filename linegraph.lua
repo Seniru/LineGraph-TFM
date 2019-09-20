@@ -139,7 +139,6 @@ end
 --getters
 function LineChart:getId() return self.id end
 function LineChart:getDimension() return { x = self.x, y = self.y, w = self.w, h = self.h } end
-function LineChart:getData(axis) if axis == "x" then return self.dataX else return self.dataY end end
 function LineChart:getMinX() return self.minX end
 function LineChart:getMaxX() return self.maxX end
 function LineChart:getMinY() return self.minY end
