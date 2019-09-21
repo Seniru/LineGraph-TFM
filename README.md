@@ -1,4 +1,5 @@
 
+
 <h1 align='center'>LineGraph-TFM</h1>
 <p align='center'><a href="https://ibb.co/d2vWYHC"><img src="https://i.ibb.co/cF9gnsf/graph.png" alt="graph" border="0" width="90%" height="250"></a></p>
 <p align='center'> 
@@ -17,13 +18,23 @@
 - Class based
 - Easy
 
+### What's new! :fireworks: :fireworks: :fireworks:
+
+- Now you can add multiple Series to the same graph. Check out the 
+[documentation](https://github.com/Seniru/LineGraph-TFM/blob/master/documentation.md) for more information!
 ### Usage
 ```lua
 --insert the library code before the script
 --then call LineChart.init()
 LineChart.init()
---then just call LineChart(id, x, y, w, h, dataX, dataY) to create a new chart
-chart = LineChart(1, 200, 50, 400, 200, {-3, -2, -1, 0, 1, 2, 3}, {-3, -2, -1, 0, 1, 2, 3})
+--then call LineChart(id, x, y, w, h) to create a new chart
+chart = LineChart(1, 200, 50, 400, 200)
+--create a new series to insert into the created chart.
+series1 = Series({1,2,3}, {1,2,3}, "series1")
+--add it to the chart
+chart:addSeries(series1)
+--set the labels to display (optional)
+chart:showLabels()
 --display the chart
 chart:show()
 -- this should show a linear chart ...
@@ -36,13 +47,17 @@ Check the [documentation](https://github.com/Seniru/LineGraph-TFM/blob/master/do
 <a href="https://www.codecogs.com/eqnedit.php?latex=y&space;=&space;tan\&space;x" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y&space;=&space;tan\&space;x" title="y = tan\ x" /></a>
 
 ```lua
+LineChart.init() --initialzing
+
 x = range(-5, 5, 0.5)
 y = map(x, function(x) return math.tan(x) end)
 
-chart = LineChart(1, 200, 50, 400, 200, x, y) --instantiation
-chart:setLineColor(0xFFCC00) --sets the line color to yellowish-orange
+chart = LineChart(1, 200, 50, 400, 200) --instantiation
+series1 = Series(x, y, "y = tan x", 0xFFCC00) -- creates a new series with yellowish-orange color
+chart:addSeries(series1)
 chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
 chart:show() --display the chart
+
 ```
 <p align='center'>
 <a href="https://ibb.co/609mvks"><img src="https://i.ibb.co/1GyLsk2/graph2.png" alt="graph2" border="0" width=95% height=250></a>
@@ -52,11 +67,13 @@ chart:show() --display the chart
 <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;y&space;=&space;2x^2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;y&space;=&space;2x^2" title="y = 2x^2" /></a>
 
 ```lua
+LineChart.init() --initializing
+
 x = range(-5, 5, 0.5)
 y = map(x, function(x) return 2 * x * x end)
 
-chart = LineChart(1, 200, 50, 400, 200, x, y) --instantiation
-chart:setLineColor(0xCC89FF) --sets the line color to purple
+chart = LineChart(1, 200, 50, 400, 200) --instantiation
+chart:addSeries(Series(x, y, "y = 2x^2", 0xCC89FF)) --adds a new series with color purple
 chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
 chart:show() --display the chart
 ```
@@ -65,16 +82,19 @@ chart:show() --display the chart
 
 Real time Graphs! <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;sin(x)&space;\times&space;x&space;^2&space;\times&space;tanh(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;sin(x)&space;\times&space;x&space;^2&space;\times&space;tanh(x)" title="sin(x) \times x ^2 \times tanh(x)" /></a>
 ```lua
-chart = LineChart(1, 200, 50, 400, 200, {0}, {0}) --instantiation
-chart:setLineColor(0xDD32CC) --sets the line color to pink
+LineChart.init()
+
+chart = LineChart(1, 200, 50, 400, 200) --instantiation
+series1 = Series({0}, {0}, "Real time", 0xDD32CC) --creates a new series
 chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
+chart:addSeries(series1) --adds the new series
 
 currX = 0
 --the real time mageic is here!
 function eventLoop(l, r)
 	local x = range(currX, currX + 10, 0.1) --creates the x coordinates
 	local y = map(x, function(x) return  math.sin(x) * x * x * math.tanh(x) end ) --maps x values to the specified function
-	chart:setData(x,y) -- sets the new data to the graph
+	series1:setData(x, y) --set new data to the series
 	chart:show() --displays it
 	currX = currX + 0.5 --this cause x coordinate to move by 0.5 every 500ms
 end
@@ -82,6 +102,32 @@ end
 <p align='center'>
 	<img src='https://media.giphy.com/media/ZbSt4f4p32yU0est9S/giphy.gif' width=95% height=250>
 </p>
+
+Multi-Series Graphs! 
+
+```lua
+LineChart.init()
+
+chart = LineChart(1, 200, 50, 400, 200) --creates the chart (container for the series)
+chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
+xData = range(0, 20, 1)  --creates a list of numbers from 0 to 20
+
+series1 = Series(xData, xData, "linear") --creates a linear series
+series2 = Series(xData, map(xData, function(x) return math.cos(x) end), "y = cos x") --creates a series which maps 'y' values to the 'tan x' value
+series3 = Series(xData, map(xData, function(x) return math.random(x) end), "random") --creates a series which maps 'y' values randomly to 'x'
+
+--add all the series
+chart:addSeries(series1)
+chart:addSeries(series2)
+chart:addSeries(series3)
+
+chart:showLabels() --show the labels
+chart:show() --show the plots!
+```
+<p align='center'>
+	<img src='https://i.ibb.co/F7w6sFp/Capt32ure.png' width=95% height=250>
+</p>
+
 
 ## Contributors ✨
 
