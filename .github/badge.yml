@@ -1,0 +1,5 @@
+types:
+  docs: documentation
+  chore: chore
+  fix: fix
+  feat: feature
