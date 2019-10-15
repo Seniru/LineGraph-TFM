@@ -1,0 +1,32 @@
+{
+  "name": "linegraph-tfm",
+  "version": "0.2.0",
+  "description": "Lite, Reusable and customizable line charts for Transformice!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seniru/LineGraph-TFM.git"
+  },
+  "keywords": [
+    "lite",
+    "transformice",
+    "library",
+    "graphs",
+    "line-graphs",
+    "customizable",
+    "easy"
+  ],
+  "author": "Seniru Pasan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Seniru/LineGraph-TFM/issues"
+  },
+  "homepage": "https://github.com/Seniru/LineGraph-TFM#readme",
+  "dependencies": {
+    "luamin": "^1.0.4"
+  }
+}

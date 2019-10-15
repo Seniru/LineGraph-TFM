@@ -1,3 +1,5 @@
+local Series, LineChart
+
 --credits: https://snipplr.com/view/13086/number-to-hex/
 --modified by me
 local hexstr = '0123456789abcdef'
@@ -57,7 +59,7 @@ end
 
 
 --class Series
-local Series = {}
+Series = {}
 Series.__index = Series
 
 setmetatable(Series, {
@@ -108,7 +110,7 @@ function Series:setLineWidth(w)
 end
 
 -- class LineChart
-local LineChart = {}
+LineChart = {}
 LineChart.__index = LineChart
 LineChart._joints = 10000
 
@@ -155,7 +157,7 @@ function LineChart:getDataLength()
   end
   return count
 end
-	
+
 function LineChart:show()
     self:refresh()
     local floor, ceil = math.floor, math.ceil
@@ -243,7 +245,7 @@ end
 
 function LineChart:hide()
 	for id = 10000, 17000, 1000 do
-		ui.removeTextArea(id + self.id) 
+		ui.removeTextArea(id + self.id)
 	end
 	for d = self.joints, self.joints + self:getDataLength(), 1 do
 		tfm.exec.removeJoint(d)
@@ -258,7 +260,7 @@ function LineChart:showLabels(show)
       labels = labels .. "<font color='#" .. num2hex(series:getColor()) .. "'> ▉<b> " .. series:getName() .. "</b></font><br>"
     end
     ui.addTextArea(16000 + self.id, labels, nil, self.x + self.w + 15, self.y, 80, 18 * #self.series, self:getGraphColor().bgColor, self:getGraphColor().borderColor, self:getAlpha(), true )
-  else 
+  else
     ui.removeTextArea(16000 + self.id, nil)
   end
 end
