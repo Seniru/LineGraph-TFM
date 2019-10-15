@@ -13,6 +13,14 @@ local function num2hex(num)
     return string.upper(s == '' and '0' or s)
 end
 
+--[====[
+    @type func
+    @name getMin(tbl)
+    @param tbl:number[] Input table
+    @return number Minimum value
+    @brief Returns the minimum value of the passed table
+--]====]
+
 local function getMin(tbl)
 	local min = tbl[1]
 	for v = 1, #tbl do
@@ -24,6 +32,13 @@ local function getMin(tbl)
 	return min
 end
 
+--[====[
+    @type func
+    @name getMax(tbl)
+    @param tbl:number[] Input table
+    @return number Maximum value
+    @brief Returns the maximum value of the passed table
+--]====]
 local function getMax(tbl)
 	local max = tbl[1]
 	for v = 1, #tbl do
@@ -59,6 +74,14 @@ end
 
 
 --class Series
+--[====[
+    @type class
+    @name Series
+    @brief A data series
+    @description [
+        Data series can be used to store X and Y data of something. This can be also used inside a #LineChart instance to output the data as a chart
+    ]
+--]====]
 Series = {}
 Series.__index = Series
 
@@ -68,6 +91,19 @@ setmetatable(Series, {
   end,
 })
 
+--[====[
+    @type func
+    @name Series.new(dx, dy, name, col)
+    @param dx:number[] The <code>x</code> data
+    @param dy:number[] The <code>y</code> data
+    @param name:string The name of the series.
+    @param col:number|nil The color of the series. If <code>nil</code> or nothing is provided assigns a random color.
+    @return A new Series instance
+    @brief Creates a new Series instance
+    @description [
+        Creates a new series instance. Note that you can also Series(dx, dy, name, col) for the same purpose.
+    ]
+--]====]
 function Series.new(dx, dy, name, col)
   assert(#dx == #dy, "Expected same number of data for both axis")
   local self = setmetatable({ }, Series)
@@ -77,10 +113,38 @@ function Series.new(dx, dy, name, col)
   return self
 end
 
+--[====[
+    @type func
+    @name Series:getName()
+    @return string The name of the series
+    @brief Returns the name of the series
+--]====]
 function Series:getName() return self.name end
+
+--[====[
+    @type func
+    @name Series:getDX()
+    @return number[] The X data
+    @brief Returns the data X
+--]====]
 function Series:getDX() return self.dx end
+
+--[====[
+    @type func
+    @name Series:getDX()
+    @return number[] The Y data
+    @brief Returns the data Y
+--]====]
 function Series:getDY() return self.dy end
+
+--[====[
+    @type func
+    @name Series:getColor()
+    @return number the color of the series
+    @brief Returns the color of the series
+--]====]
 function Series:getColor() return self.col end
+
 function Series:getMinX() return self.minX end
 function Series:getMinY() return self.minY end
 function Series:getMaxX() return self.maxX end

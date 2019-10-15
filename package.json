@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node build.js"
+    "build": "node build.js",
+    "generate:docs": "node makedocs.js",
+    "release": "npm run build && npm run generate:docs"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
   },
   "homepage": "https://github.com/Seniru/LineGraph-TFM#readme",
   "dependencies": {
+    "luadoc": "^1.0.10",
     "luamin": "^1.0.4"
   }
 }
