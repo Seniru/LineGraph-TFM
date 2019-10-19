@@ -20,7 +20,6 @@ end
     @return number Minimum value
     @brief Returns the minimum value of the passed table
 --]====]
-
 function getMin(tbl)
 	local min = tbl[1]
 	for v = 1, #tbl do
@@ -50,6 +49,15 @@ function getMax(tbl)
 	return max
 end
 
+--[====[
+    @type func
+    @name map(tbl, f)
+    @param tbl:any[] Input table
+    @param f:function Function to map the table
+    @return any[] A new table which is mapped according to the given function and the table
+    @brief This function can be used to map values of a table
+    @desc This function can be used to map values of a table. The return table would be a table mapped according the input table and the function
+--]====]
 function map(tbl, f)
 	local res = {}
 	for k, v in next, tbl do
@@ -58,6 +66,15 @@ function map(tbl, f)
 	return res
 end
 
+--[====[
+    @type func
+    @name range(from, to, step)
+    @param from:number The starting value
+    @param to:number The end value
+    @param step:step The step value
+    @return number[] A table in the range of the given inputs according to the step
+    @brief Returns a table in the range of the given inputs according to the step
+--]====]
 function range(from, to, step)
     local insert = table.insert
 	local res = { }
