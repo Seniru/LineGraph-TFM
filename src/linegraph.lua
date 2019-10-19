@@ -1,6 +1,3 @@
-
-tfm.exec.disableAutoNewGame(true)
-
 local Series, LineChart, getMin, getMax, map, range
 
 --credits: https://snipplr.com/view/13086/number-to-hex/
@@ -15,6 +12,15 @@ function num2hex(num)
     end
     return string.upper(s == '' and '0' or s)
 end
+
+function split(s, delimiter)
+    result = {};
+    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match);
+    end
+    return result;
+end
+
 
 --[====[
     @type func
@@ -191,6 +197,16 @@ function LineChart.init()
     tfm.exec.addPhysicObject(-1, 0, 0, { type = 14, miceCollision = false, groundCollision = false })
 end
 
+function LineChart.handleClick(call, n, id)
+    if call:sub(0, ("lchart:data:["):len()) == 'lchart:data:[' then
+        local cdata = split(call:sub(("lchart:data:["):len() + 1, -2), ",")
+        local cx, cy, cdx, cdy = split(cdata[1], ":")[2], split(cdata[2], ":")[2], split(cdata[3], ":")[2], split(cdata[4], ":")[2]
+        ui.addTextArea(18000, "<a href='event:close'>X: " .. cdx .. "<br>Y: " ..cdy .. "</a>", n, cx, cy, 80, 30, nil, nil, 0.5, true)
+    elseif call == "close" then
+        ui.removeTextArea(id)
+    end
+end
+
 function LineChart.new(id, x, y, w, h)
 	local self = setmetatable({ }, LineChart)
 	self.id = id
@@ -201,7 +217,7 @@ function LineChart.new(id, x, y, w, h)
 	self.showing = false
 	self.joints = LineChart._joints
 	LineChart._joints = LineChart._joints + 10000
-  self.series = { }
+    self.series = { }
 	return self
 end
 
@@ -246,16 +262,23 @@ function LineChart:show()
 	local yRatio = self.h / self.yRange
   for id, series in next, self.series do
     for d = 1, series:getDataLength(), 1 do
+        local x1 = floor(series:getDX()[d] * xRatio  + self.x - (self.minX * xRatio))
+        local y1 = floor(invertY(series:getDY()[d] * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio))
+        local x2 = floor((series:getDX()[d+1]  or series:getDX()[d]) * xRatio + self.x - (self.minX * xRatio))
+        local y2 = floor(invertY((series:getDY()[d+1] or series:getDY()[d]) * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio))
 		tfm.exec.addJoint(self.id + 6 + joints ,-1,-1,{
 			type=0,
-			point1= floor(series:getDX()[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. floor(invertY(series:getDY()[d] * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
-			point2=  floor((series:getDX()[d+1]  or series:getDX()[d]) * xRatio + self.x - (self.minX * xRatio)) .. "," .. floor(invertY((series:getDY()[d+1] or series:getDY()[d]) * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
+			point1= x1 .. ",".. y1,
+			point2=  x2 .. "," .. y2,
 			damping=0.2,
 			line=series:getLineWidth(),
 			color=series:getColor(),
 			alpha=1,
 			foreground=true
-		})
+        })
+        if self.showDPoints then
+            ui.addTextArea(16000 + self.id + joints, "<font color='#" .. num2hex(series:getColor()) .."'><a href='event:lchart:data:[x:" .. x1 .. ",y:" .. y1 .. ",dx:" .. series:getDX()[d] .. ",dy:" .. series:getDY()[d] .. "]'>█</a></font>", nil, x1, y1, 10, 10, nil, nil, 0, true)
+        end
 		joints = joints + 1
 	  end
   end
@@ -267,6 +290,10 @@ end
 function LineChart:setGraphColor(bg, border)
 	self.bg = bg
 	self.border = border
+end
+
+function LineChart:setShowDataPoints(show)
+    self.showDPoints = show
 end
 
 function LineChart:setAlpha(alpha)
@@ -313,7 +340,10 @@ end
 function LineChart:hide()
 	for id = 10000, 17000, 1000 do
 		ui.removeTextArea(id + self.id)
-	end
+    end
+    for id = self.id + 16000, self.joints, 1 do
+        ui.removeTextArea(id + self.id)
+    end
 	for d = self.joints, self.joints + self:getDataLength() + 5, 1 do
 		tfm.exec.removeJoint(d)
 	end
@@ -372,16 +402,3 @@ function LineChart:displayGrids(show)
 		})
     end
 end
-
-
---TODO: Remove the code below
-LineChart.init() --initializing
-
-x = range(-5, 5, 0.5)
-y = map(x, function(x) return 2 * x * x end)
-
-chart = LineChart(1, 200, 110, 400, 200) --instantiation
-chart:addSeries(Series(x, y, "y = 2x^2", 0xCC89FF)) --adds a new series with color purple
-chart:setGraphColor(0xFFFFFF, 0xFFFFFF) --sets graph color to white
-chart:displayGrids()
-chart:show() --display the char
