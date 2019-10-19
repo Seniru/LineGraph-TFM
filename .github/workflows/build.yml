@@ -19,12 +19,6 @@ jobs:
         npm install
         npm run build
         npm run make:docs
-        git config --global user.name "Seniru"
-        git config --global user.email "senirupasan@gmail.com"
-        git add .
-        git status
-        git commit -m "chore: Build"
-        git push origin HEAD:master
-
+        
       env:
         CI: true
