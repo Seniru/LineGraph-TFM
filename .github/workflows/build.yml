@@ -19,6 +19,8 @@ jobs:
         npm install
         npm run build
         npm run make:docs
+        git add .
+        git status
         git commit -m chore: Build
       env:
         CI: true
