@@ -243,7 +243,7 @@ function LineChart:show()
 	local yRatio = self.h / self.yRange
   for id, series in next, self.series do
     for d = 1, series:getDataLength(), 1 do
-		tfm.exec.addJoint(self.id + joints ,-1,-1,{
+		tfm.exec.addJoint(self.id + 6 + joints ,-1,-1,{
 			type=0,
 			point1= floor(series:getDX()[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. floor(invertY(series:getDY()[d] * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
 			point2=  floor((series:getDX()[d+1]  or series:getDX()[d]) * xRatio + self.x - (self.minX * xRatio)) .. "," .. floor(invertY((series:getDY()[d+1] or series:getDY()[d]) * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
@@ -311,7 +311,7 @@ function LineChart:hide()
 	for id = 10000, 17000, 1000 do
 		ui.removeTextArea(id + self.id)
 	end
-	for d = self.joints, self.joints + self:getDataLength(), 1 do
+	for d = self.joints, self.joints + self:getDataLength() + 5, 1 do
 		tfm.exec.removeJoint(d)
 	end
 	self.showing = false
@@ -327,4 +327,45 @@ function LineChart:showLabels(show)
   else
     ui.removeTextArea(16000 + self.id, nil)
   end
+end
+
+function LineChart:displayGrids(show)
+    if show or show == nil then
+        local interval = self.h / 5
+        for id, y in next, range(self.y + interval, self.y + self.h - interval, interval) do
+            --Adds joints in the mid 4 positions of the graph
+            tfm.exec.addJoint(self.id + id ,-1,-1,{
+			    type=0,
+			    point1= self.x .. "," .. y,
+			    point2=  self.x + self.w .. "," .. y,
+			    damping=0.2,
+			    line=1,
+			    alpha=1,
+                foreground=true,
+                color=0xFFFFFF
+		    })
+        end
+        --Adds a joint near the median x value of the graph
+        tfm.exec.addJoint(self.id + 5 ,-1,-1,{
+			    type=0,
+			    point1= self.x + self.w / 2 .. "," .. self.y,
+			    point2=  self.x + self.w / 2 .. "," .. self.y + self.h,
+			    damping=0.2,
+			    line=2,
+			    alpha=1,
+                foreground=true,
+                color=0xFFFFFF
+        })
+        --Adds a joint near the median y value of the graph
+        tfm.exec.addJoint(self.id + 6 ,-1,-1,{
+			    type=0,
+			    point1= self.x  .. "," .. self.y + self.h / 2,
+			    point2=  self.x + self.w .. "," .. self.y + self.h / 2,
+			    damping=0.2,
+			    line=2,
+			    alpha=1,
+                foreground=true,
+                color=0xFFFFFF
+		})
+    end
 end
