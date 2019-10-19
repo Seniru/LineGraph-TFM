@@ -13,6 +13,15 @@ function num2hex(num)
     return string.upper(s == '' and '0' or s)
 end
 
+function split(s, delimiter)
+    result = {};
+    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match);
+    end
+    return result;
+end
+
+
 --[====[
     @type func
     @name getMin(tbl)
@@ -20,6 +29,7 @@ end
     @return number Minimum value
     @brief Returns the minimum value of the passed table
 --]====]
+
 function getMin(tbl)
 	local min = tbl[1]
 	for v = 1, #tbl do
@@ -49,15 +59,6 @@ function getMax(tbl)
 	return max
 end
 
---[====[
-    @type func
-    @name map(tbl, f)
-    @param tbl:any[] Input table
-    @param f:function Function to map the table
-    @return any[] A new table which is mapped according to the given function and the table
-    @brief This function can be used to map values of a table
-    @desc This function can be used to map values of a table. The return table would be a table mapped according the input table and the function
---]====]
 function map(tbl, f)
 	local res = {}
 	for k, v in next, tbl do
@@ -66,15 +67,6 @@ function map(tbl, f)
 	return res
 end
 
---[====[
-    @type func
-    @name range(from, to, step)
-    @param from:number The starting value
-    @param to:number The end value
-    @param step:step The step value
-    @return number[] A table in the range of the given inputs according to the step
-    @brief Returns a table in the range of the given inputs according to the step
---]====]
 function range(from, to, step)
     local insert = table.insert
 	local res = { }
@@ -205,6 +197,16 @@ function LineChart.init()
     tfm.exec.addPhysicObject(-1, 0, 0, { type = 14, miceCollision = false, groundCollision = false })
 end
 
+function LineChart.handleClick(call, n, id)
+    if call:sub(0, ("lchart:data:["):len()) == 'lchart:data:[' then
+        local cdata = split(call:sub(("lchart:data:["):len() + 1, -2), ",")
+        local cx, cy, cdx, cdy = split(cdata[1], ":")[2], split(cdata[2], ":")[2], split(cdata[3], ":")[2], split(cdata[4], ":")[2]
+        ui.addTextArea(18000, "<a href='event:close'>X: " .. cdx .. "<br>Y: " ..cdy .. "</a>", n, cx, cy, 80, 30, nil, nil, 0.5, true)
+    elseif call == "close" then
+        ui.removeTextArea(id)
+    end
+end
+
 function LineChart.new(id, x, y, w, h)
 	local self = setmetatable({ }, LineChart)
 	self.id = id
@@ -215,7 +217,7 @@ function LineChart.new(id, x, y, w, h)
 	self.showing = false
 	self.joints = LineChart._joints
 	LineChart._joints = LineChart._joints + 10000
-  self.series = { }
+    self.series = { }
 	return self
 end
 
@@ -260,16 +262,23 @@ function LineChart:show()
 	local yRatio = self.h / self.yRange
   for id, series in next, self.series do
     for d = 1, series:getDataLength(), 1 do
-		tfm.exec.addJoint(self.id + joints ,-1,-1,{
+        local x1 = floor(series:getDX()[d] * xRatio  + self.x - (self.minX * xRatio))
+        local y1 = floor(invertY(series:getDY()[d] * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio))
+        local x2 = floor((series:getDX()[d+1]  or series:getDX()[d]) * xRatio + self.x - (self.minX * xRatio))
+        local y2 = floor(invertY((series:getDY()[d+1] or series:getDY()[d]) * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio))
+		tfm.exec.addJoint(self.id + 6 + joints ,-1,-1,{
 			type=0,
-			point1= floor(series:getDX()[d] * xRatio  + self.x - (self.minX * xRatio)) .. ",".. floor(invertY(series:getDY()[d] * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
-			point2=  floor((series:getDX()[d+1]  or series:getDX()[d]) * xRatio + self.x - (self.minX * xRatio)) .. "," .. floor(invertY((series:getDY()[d+1] or series:getDY()[d]) * yRatio) + self.y - invertY(self.h) + (self.minY * yRatio)),
+			point1= x1 .. ",".. y1,
+			point2=  x2 .. "," .. y2,
 			damping=0.2,
 			line=series:getLineWidth(),
 			color=series:getColor(),
 			alpha=1,
 			foreground=true
-		})
+        })
+        if self.showDPoints then
+            ui.addTextArea(16000 + self.id + joints, "<font color='#" .. num2hex(series:getColor()) .."'><a href='event:lchart:data:[x:" .. x1 .. ",y:" .. y1 .. ",dx:" .. series:getDX()[d] .. ",dy:" .. series:getDY()[d] .. "]'>█</a></font>", nil, x1, y1, 10, 10, nil, nil, 0, true)
+        end
 		joints = joints + 1
 	  end
   end
@@ -281,6 +290,10 @@ end
 function LineChart:setGraphColor(bg, border)
 	self.bg = bg
 	self.border = border
+end
+
+function LineChart:setShowDataPoints(show)
+    self.showDPoints = show
 end
 
 function LineChart:setAlpha(alpha)
@@ -327,8 +340,11 @@ end
 function LineChart:hide()
 	for id = 10000, 17000, 1000 do
 		ui.removeTextArea(id + self.id)
-	end
-	for d = self.joints, self.joints + self:getDataLength(), 1 do
+    end
+    for id = self.id + 16000, self.joints, 1 do
+        ui.removeTextArea(id + self.id)
+    end
+	for d = self.joints, self.joints + self:getDataLength() + 5, 1 do
 		tfm.exec.removeJoint(d)
 	end
 	self.showing = false
@@ -344,4 +360,45 @@ function LineChart:showLabels(show)
   else
     ui.removeTextArea(16000 + self.id, nil)
   end
+end
+
+function LineChart:displayGrids(show)
+    if show or show == nil then
+        local interval = self.h / 5
+        for id, y in next, range(self.y + interval, self.y + self.h - interval, interval) do
+            --Adds joints in the mid 4 positions of the graph
+            tfm.exec.addJoint(self.id + id ,-1,-1,{
+			    type=0,
+			    point1= self.x .. "," .. y,
+			    point2=  self.x + self.w .. "," .. y,
+			    damping=0.2,
+			    line=1,
+			    alpha=1,
+                foreground=true,
+                color=0xFFFFFF
+		    })
+        end
+        --Adds a joint near the median x value of the graph
+        tfm.exec.addJoint(self.id + 5 ,-1,-1,{
+			    type=0,
+			    point1= self.x + self.w / 2 .. "," .. self.y,
+			    point2=  self.x + self.w / 2 .. "," .. self.y + self.h,
+			    damping=0.2,
+			    line=2,
+			    alpha=1,
+                foreground=true,
+                color=0xFFFFFF
+        })
+        --Adds a joint near the median y value of the graph
+        tfm.exec.addJoint(self.id + 6 ,-1,-1,{
+			    type=0,
+			    point1= self.x  .. "," .. self.y + self.h / 2,
+			    point2=  self.x + self.w .. "," .. self.y + self.h / 2,
+			    damping=0.2,
+			    line=2,
+			    alpha=1,
+                foreground=true,
+                color=0xFFFFFF
+		})
+    end
 end
