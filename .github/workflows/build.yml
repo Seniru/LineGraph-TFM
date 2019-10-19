@@ -19,5 +19,6 @@ jobs:
         npm install
         npm run build
         npm run make:docs
+        . tools.push.sh
       env:
         CI: true
