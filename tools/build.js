@@ -8,7 +8,7 @@ const end = '\033[0m';
 function minifiy(code) {
     console.log('\nMinifying script...');
 
-    fs.writeFile("src/linegraph.min.lua", luamin.minify(code) + ";Series=a;LineChart=b\n", (err) => {
+    fs.writeFile("src/linegraph.min.lua", luamin.minify(code) + ";Series=a;LineChart=b;getMin=c;getMax=d;map=e;range=f\n", (err) => {
         if (err) error(err);
     });
 }

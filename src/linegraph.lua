@@ -1,9 +1,9 @@
-local Series, LineChart
+local Series, LineChart, getMin, getMax, map, range
 
 --credits: https://snipplr.com/view/13086/number-to-hex/
 --modified by me
 local hexstr = '0123456789abcdef'
-local function num2hex(num)
+function num2hex(num)
     local s = ''
     while num > 0 do
         local mod = math.fmod(num, 16)
@@ -21,7 +21,7 @@ end
     @brief Returns the minimum value of the passed table
 --]====]
 
-local function getMin(tbl)
+function getMin(tbl)
 	local min = tbl[1]
 	for v = 1, #tbl do
 		v = tbl[v]
@@ -39,7 +39,7 @@ end
     @return number Maximum value
     @brief Returns the maximum value of the passed table
 --]====]
-local function getMax(tbl)
+function getMax(tbl)
 	local max = tbl[1]
 	for v = 1, #tbl do
 		v = tbl[v]
@@ -50,7 +50,7 @@ local function getMax(tbl)
 	return max
 end
 
-local function map(tbl, f)
+function map(tbl, f)
 	local res = {}
 	for k, v in next, tbl do
 		res[k] = f(v)
@@ -58,7 +58,7 @@ local function map(tbl, f)
 	return res
 end
 
-local function range(from, to, step)
+function range(from, to, step)
     local insert = table.insert
 	local res = { }
 	for i = from, to, step do
