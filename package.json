@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node build.js",
-    "generate:docs": "node makedocs.js",
-    "release": "npm run build && npm run generate:docs"
+    "build": "node tools/build.js",
+    "make:docs": "rm -r docs | node tools/makedocs.js && mv src/docs ."
   },
   "repository": {
     "type": "git",

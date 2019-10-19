@@ -1,0 +1,488 @@
+
+                <html>
+                    <head>
+                        <meta charset="utf-8">
+                        <title>linegraph.lua</title>
+                        <style>
+                            @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+html, body {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    padding: 25px;
+    background-color: #efefef;
+}
+
+body * {
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    color: #585858;
+}
+
+.documentationWrap {
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 0px 1px 3px 2px rgba(171, 171, 171, 0.34);
+}
+
+.file {
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #2a8ec7;
+}
+
+.file .fileTitle {
+    padding: 10px;
+    padding-left: 20px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    background-color: #ff940f;
+}
+
+.file .fileTitle div {
+    font-size: 20px;
+    color: #fff;
+}
+
+.file .contentList {
+    padding: 25px;
+    padding-bottom: 0;
+}
+
+.file .contentList > div {
+    margin-bottom: 45px;
+}
+
+.file .contentList > div:last-child {
+    margin-bottom: 0;
+}
+
+.file .contentList > .item {
+
+}
+
+.file .contentList > .item .name {
+    cursor: default;
+}
+
+.file .contentList > .item .top {
+    display: table;
+}
+
+.file .contentList > .item .top > div{
+    display: table-cell;
+}
+
+.file .contentList > .item .top .name{
+    min-width: 200px;
+    max-width: 400px;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.file .contentList > .item .name .empty_name {
+    background-color: #ffc4c4;
+}
+
+.file .contentList > .item .description{
+    margin-top: 10px;
+}
+
+.file .contentList > .item .description .brief {
+    text-indent: 10px;
+}
+
+.file .contentList > .item .description .full {
+    margin-top: 10px;
+    text-indent: 10px;
+}
+
+.file .contentList > .item .params {
+    display: table;
+    margin-top: 7px;
+    padding-left: 25px;
+}
+
+.file .contentList > .item .params .item {
+    margin-bottom: 7px;
+}
+
+.file .contentList > .item .params .item > div{
+    display: table-cell;
+}
+
+.file .contentList > .item .params .name {
+    min-width: 200px;
+    max-width: 400px;
+}
+
+.file .contentList > .item .params .param-name {
+    background: #f1f1f1;
+    padding: 0 3px;
+}
+
+.file .contentList > .item .params .param-type {
+    margin-left: 10px;
+    color: #0b820a;
+}
+
+.file .contentList > .item .return {
+    display: table;
+    padding-left: 25px;
+}
+
+.file .contentList > .item .return > div{
+    display: table-cell;
+}
+
+.file .contentList > .item .return .return-type {
+    min-width: 200px;
+    max-width: 400px;
+}
+
+.file .contentList > .item .return .return-title {
+    background: #d6ecff;
+    padding: 0 3px;
+}
+
+.file .contentList > .item .return .return-type-title {
+    margin-left: 10px;
+    color: #0b820a;
+}
+
+.back {
+    margin-bottom: 10px;
+}
+
+.back a {
+    text-decoration: underline;
+}
+
+/* List files on main page */
+.list-files {
+
+}
+
+.list-files > .file-item {
+    outline: 1px solid rgba(255, 148, 15, 0.2);
+    margin-bottom: 20px;
+}
+
+.list-files > .file-item a {
+    display: block;
+    padding: 10px;
+    padding-left: 20px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.list-files > .file-item:hover {
+    background-color: #ff940f;
+}
+
+.list-files > .file-item:hover a {
+    color: #fff;
+}
+
+#powered-by {
+    text-align: right;
+}
+
+#powered-by a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+#powered-by a .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 25px;
+    margin-top: 25px;
+    text-decoration: none;
+}
+
+#powered-by span {
+    padding-right: 5px;
+}
+
+#powered-by img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+                        </style>
+                       </head>
+                    <body>
+                        <div class="documentationWrap">
+                
+                           <div class="back">
+                                <a href="../index.html">Back</a>
+                           </div>
+                           <div class="file">
+                                <div class="fileTitle">
+                                    <div>src/linegraph.lua</div>
+                                </div>
+                           <div class="contentList">
+                            <div class="item">
+                    <div class="top">
+                        <div class="name">getMin(tbl)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">tbl</span><span class="param-type">number[]</span>
+                                </div>
+                                <div class="description">
+                                    Input table
+                                </div>
+                            </div>
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        Minimum value    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the minimum value of the passed table
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">getMax(tbl)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">tbl</span><span class="param-type">number[]</span>
+                                </div>
+                                <div class="description">
+                                    Input table
+                                </div>
+                            </div>
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        Maximum value    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the maximum value of the passed table
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            A data series
+                        </div>
+                        <div class="full">
+                            Data series can be used to store X and Y data of something. This can be also used inside a #LineChart instance to output the data as a chart                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series.new(dx, dy, name, col)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">dx</span><span class="param-type">number[]</span>
+                                </div>
+                                <div class="description">
+                                    The <code>x</code> data
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">dy</span><span class="param-type">number[]</span>
+                                </div>
+                                <div class="description">
+                                    The <code>y</code> data
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">name</span><span class="param-type">string</span>
+                                </div>
+                                <div class="description">
+                                    The name of the series.
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">col</span><span class="param-type">number|nil</span>
+                                </div>
+                                <div class="description">
+                                    The color of the series. If <code>nil</code> or nothing is provided assigns a random color.
+                                </div>
+                            </div>
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">A</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        new Series instance    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Creates a new Series instance
+                        </div>
+                        <div class="full">
+                            Creates a new series instance. Note that you can also Series(dx, dy, name, col) for the same purpose.                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getName()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">string</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        The name of the series    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the name of the series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getDX()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number[]</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        The X data    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the data X
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getDX()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number[]</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        The Y data    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the data Y
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getColor()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        the color of the series    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the color of the series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div></div></div>
+                        </div>
+                        <div id="powered-by">
+                            <a href="http://metal-evolution.com/" target="_blank">
+                                <div class="wrap">
+                                    <span>Powered by ©MetalEvolutionStudio</span>
+                                    <img src="http://metal-evolution.com/global-assets/images/mes-logo.png" alt="©MetalEvolutionStudio">
+                                </div>
+                            </a>
+                        </div>
+                    </body>
+                </html>
+                

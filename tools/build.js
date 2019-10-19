@@ -8,14 +8,14 @@ const end = '\033[0m';
 function minifiy(code) {
     console.log('\nMinifying script...');
 
-    fs.writeFile("linegraph.min.lua", luamin.minify(code) + ";Series=a;LineChart=b\n", (err) => {
+    fs.writeFile("src/linegraph.min.lua", luamin.minify(code) + ";Series=a;LineChart=b\n", (err) => {
         if (err) error(err);
     });
 }
 
 console.log('\nReading linegraph.lua...');
 
-fs.readFile("linegraph.lua", "utf-8", (err, data) => {
+fs.readFile("src/linegraph.lua", "utf-8", (err, data) => {
     code = data;
     minifiy(code);
     console.log(green + "\nSuccessfully Written to File." + end);

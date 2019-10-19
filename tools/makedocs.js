@@ -1,3 +1,3 @@
 const luadoc = require('luadoc');
 
-luadoc.MesLuaDoc('.');
+luadoc.MesLuaDoc('src');
