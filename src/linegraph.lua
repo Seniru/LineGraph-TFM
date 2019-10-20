@@ -82,7 +82,7 @@ end
     @param step:number The step value
     @return number[] A table within the range of 'from' and 'to' with a 'step' interval
     @brief Returns a new table within the range of 'from' and 'to' with a 'step' interval
-    @desc This method is similar to the range method in python. You can use this method inside loops or for any other action
+    @description This method is similar to the range method in python. You can use this method inside loops or for any other action
 --]====]
 function range(from, to, step)
     local insert = table.insert
@@ -171,17 +171,81 @@ function Series:getDY() return self.dy end
 --]====]
 function Series:getColor() return self.col end
 
+--[====[
+    @type func
+    @name Series:getMinX()
+    @return number Minimum X value
+    @brief Returns the miminum X value of the series
+--]====]
 function Series:getMinX() return self.minX end
+
+--[====[
+    @type func
+    @name Series:getMinY()
+    @return number Minimum Y value
+    @brief Returns the minimum Y value of the series
+--]====]
 function Series:getMinY() return self.minY end
+
+--[====[
+    @type func
+    @name Series:getMaxX()
+    @return number Maximum X value
+    @brief Returns the maximum X value of the series
+--]====]
 function Series:getMaxX() return self.maxX end
+
+--[====[
+    @type func
+    @name Series:getMaxY()
+    @return number Maximum Y value
+    @brief Returns the maximum Y value of the series
+--]====]
 function Series:getMaxY() return self.maxY end
+
+--[====[
+    @type func
+    @name Series:getDataLength()
+    @return number The length of the data
+    @brief Returns the length of data. (This is the length of 'x' or 'y' values provided)
+--]====]
 function Series:getDataLength() return #self.dx end
+
+--[====[
+    @type func
+    @name Series:getLineWidth()
+    @return integer The width of the line
+    @brief Returns the length of the line
+    @description [
+        The line width is the width of the line that is displayed in the chart. The default line width is 3. You can change the width by using Series:setLineWidth method
+    ]
+--]====]
 function Series:getLineWidth() return self.lWidth or 3 end
 
+--[====[
+    @type func
+    @name Series:setName(name)
+    @param name:string The new name
+    @brief Sets the name of the series
+    @description [
+        Calling this method would alter the name of the series. This would also change the name in labels of the chart if labels are enabled
+    ]
+--]====]
 function Series:setName(name)
   self.name = name
 end
 
+--[====[
+    @type func
+    @name Series:setData(dx, dy)
+    @param dx:number[] New x data
+    @param dy:number[] New y data
+    @brief Sets the new x and y data
+    @description [
+        Calling this method would change the x and y data in the series. This would throw an error if <b> the lengths are not equal.</b>
+        <b>NOTE: You must call :show() method of the relevant linechart to get the updated results</b>
+    ]
+--]====]
 function Series:setData(dx, dy)
   self.dx = dx
   self.dy = dy
@@ -191,15 +255,36 @@ function Series:setData(dx, dy)
   self.maxY = getMax(dy)
 end
 
+--[====[
+    @type func
+    @name Series:setColor(col)
+    @param col:number The new color
+    @brief Sets the color of the series
+    @description [
+        Changes the line color of the series with the given color. The color should be a number and not a string. However you can use hexadecimal values like 0xFFFFFF (white color) (and without quotation marks) to improve readability of your code
+    ]
+--]====]
 function Series:setColor(col)
   self.col = col
 end
 
+--[====[
+    @type func
+    @name Series:setLineWidth(w)
+    @param w:number The width of the series
+    @brief Sets the width of the line of the series
+--]====]
 function Series:setLineWidth(w)
   self.lWidth = w
 end
 
 -- class LineChart
+
+--[====[
+    @type class
+    @name LineChart
+    @brief LineChart class defines fields and methods to deal with Series and other LineChart properties
+--]====]
 LineChart = {}
 LineChart.__index = LineChart
 LineChart._joints = 10000
@@ -210,11 +295,43 @@ setmetatable(LineChart, {
 	end
 })
 
+--[====[
+    @type func
+    @name LineChart.init()
+    @brief Initializes all the line charts
+    @description [
+        Here initializing means adding a physical object away from the visible area of the map. This is to ensure all the joints are working properly.
+        <b>NOTE: You must call this method in each new game</b>
+    ]
+--]====]
 function LineChart.init()
     tfm.exec.addPhysicObject(-1, 0, 0, { type = 14, miceCollision = false, groundCollision = false })
 end
 
-function LineChart.handleClick(call, n, id)
+--[====[
+    @type func
+    @name LineChart.handleClick(id, n, call)
+    @param id:integer The ID of the data point (text area)
+    @param n:string The name of the player
+    @param call:string Event callback
+    @brief This method handles click events to display data labels
+    @description [
+        There is no need to manually call this method inside your code. You need to just insert this inside the eventTextAreaCallback method
+        <b><i>Example</i></b>
+        <pre><code>
+            ...
+
+            function eventTextAreaCallback(id, n, call)
+                LineChart.handleclicks(id, n, call)
+            end
+
+            ...
+        </code></pre>
+
+        This method usually triggers when a player click a data label
+    ]
+--]====]
+function LineChart.handleClick(id, n, call)
     if call:sub(0, ("lchart:data:["):len()) == 'lchart:data:[' then
         local cdata = split(call:sub(("lchart:data:["):len() + 1, -2), ",")
         local cx, cy, cdx, cdy = split(cdata[1], ":")[2], split(cdata[2], ":")[2], split(cdata[3], ":")[2], split(cdata[4], ":")[2]
@@ -224,6 +341,17 @@ function LineChart.handleClick(call, n, id)
     end
 end
 
+--[====[
+    @type func
+    @name LineChart.new(id, x, y, w, h)
+    @param id:any The unique ID of the LineChart
+    @param x:integer The x position of the chart
+    @param y:integer The y position of the chart
+    @param w:integer The width of the chart
+    @param h:integer The height of th chart
+    @return LineChart A new LineChart instance
+    @brief Returns a new LineChart instance with the provided configuration
+--]====]
 function LineChart.new(id, x, y, w, h)
 	local self = setmetatable({ }, LineChart)
 	self.id = id
@@ -239,9 +367,47 @@ function LineChart.new(id, x, y, w, h)
 end
 
 --getters
+
+--[====[
+    @type func
+    @name LineChart:getID()
+    @return The ID of the chart
+    @brief any Returns the ID of the chart
+--]====]
 function LineChart:getId() return self.id end
+
+--[====[
+    @type func
+    @name LineChart:getDimension()
+    @return table The dimension of the chart
+    @brief Returns the x,y,w,h properties / dimensions of the chart
+    @description [
+        Return the dimension of the chart as a table. The dimensions of the chart can be accessed by the following keys
+        <ul>
+            <li>x</li>
+            <li>y</li>
+            <li>w</li>
+            <li>h</li>
+        </ul>
+        The above keys are relevant to the x position, y position, width and height of the chart respectively.
+    ]
+--]====]
 function LineChart:getDimension() return { x = self.x, y = self.y, w = self.w, h = self.h } end
+
+--[====[
+    @type func
+    @name LineChart:getMinX()
+    @return integer The minimum X value
+    @brief Returns the minimum X value of all the series
+--]====]
 function LineChart:getMinX() return self.minX end
+
+--[====[
+    @type func
+    @name LineChart:getMaxX()
+    @return integer The maximum X value
+    @brief Returns the maximum X value of all the series
+--]====]
 function LineChart:getMaxX() return self.maxX end
 function LineChart:getMinY() return self.minY end
 function LineChart:getMaxY() return self.maxY end
@@ -409,10 +575,6 @@ function LineChart:displayGrids(show)
         --Adds a joint near the median y value of the graph
         tfm.exec.addJoint(self.id + 6 ,-1,-1,{
 			    type=0,
-
---[====[
-
---]====]
 			    point1= self.x  .. "," .. self.y + self.h / 2,
 			    point2=  self.x + self.w .. "," .. self.y + self.h / 2,
 			    damping=0.2,
