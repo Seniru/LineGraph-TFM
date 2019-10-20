@@ -11,7 +11,7 @@ commit_website_files() {
 }
 
 upload_files() {
-  git push --quiet --set-upstream origin
+  git push --quiet --set-upstream origin HEAD:master
 }
 
 setup_git
