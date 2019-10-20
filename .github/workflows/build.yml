@@ -19,6 +19,16 @@ jobs:
         npm install
         npm run build
         npm run make:docs
-        . tools/push.sh
       env:
         CI: true
+        
+    - name: Commit files
+      run: |
+        git add .
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "ci: Automated build push" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
