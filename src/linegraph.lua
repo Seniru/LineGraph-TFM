@@ -29,7 +29,6 @@ end
     @return number Minimum value
     @brief Returns the minimum value of the passed table
 --]====]
-
 function getMin(tbl)
 	local min = tbl[1]
 	for v = 1, #tbl do
@@ -59,6 +58,14 @@ function getMax(tbl)
 	return max
 end
 
+--[====[
+    @type func
+    @name map(tbl, f)
+    @param tbl:any[] Input tble
+    @param f:function Input function
+    @return any[] A new table mapped according to the function
+    @brief Returns a new table mapped according to the function
+--]====]
 function map(tbl, f)
 	local res = {}
 	for k, v in next, tbl do
@@ -67,6 +74,16 @@ function map(tbl, f)
 	return res
 end
 
+--[====[
+    @type func
+    @name range(from, to, step)
+    @param from:number The starting number
+    @param to:number The end number
+    @param step:number The step value
+    @return number[] A table within the range of 'from' and 'to' with a 'step' interval
+    @brief Returns a new table within the range of 'from' and 'to' with a 'step' interval
+    @desc This method is similar to the range method in python. You can use this method inside loops or for any other action
+--]====]
 function range(from, to, step)
     local insert = table.insert
 	local res = { }
@@ -392,6 +409,10 @@ function LineChart:displayGrids(show)
         --Adds a joint near the median y value of the graph
         tfm.exec.addJoint(self.id + 6 ,-1,-1,{
 			    type=0,
+
+--[====[
+
+--]====]
 			    point1= self.x  .. "," .. self.y + self.h / 2,
 			    point2=  self.x + self.w .. "," .. self.y + self.h / 2,
 			    damping=0.2,
