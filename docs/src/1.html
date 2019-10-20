@@ -565,6 +565,529 @@ body * {
                                                     
                         </div>
                     </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getMinX()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        Minimum X value    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the miminum X value of the series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getMinY()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        Minimum Y value    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the minimum Y value of the series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getMaxX()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        Maximum X value    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the maximum X value of the series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getMaxY()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        Maximum Y value    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the maximum Y value of the series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getDataLength()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        The length of the data    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the length of data. (This is the length of 'x' or 'y' values provided)
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:getLineWidth()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">integer</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        The width of the line    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the length of the line
+                        </div>
+                        <div class="full">
+                            The line width is the width of the line that is displayed in the chart. The default line width is 3. You can change the width by using Series:setLineWidth method                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:setName(name)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">name</span><span class="param-type">string</span>
+                                </div>
+                                <div class="description">
+                                    The new name
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Sets the name of the series
+                        </div>
+                        <div class="full">
+                            Calling this method would alter the name of the series. This would also change the name in labels of the chart if labels are enabled                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:setData(dx, dy)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">dx</span><span class="param-type">number[]</span>
+                                </div>
+                                <div class="description">
+                                    New x data
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">dy</span><span class="param-type">number[]</span>
+                                </div>
+                                <div class="description">
+                                    New y data
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Sets the new x and y data
+                        </div>
+                        <div class="full">
+                            Calling this method would change the x and y data in the series. This would throw an error if <b> the lengths are not equal.</b>
+        <b>NOTE: You must call :show() method of the relevant linechart to get the updated results</b>                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:setColor(col)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">col</span><span class="param-type">number</span>
+                                </div>
+                                <div class="description">
+                                    The new color
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Sets the color of the series
+                        </div>
+                        <div class="full">
+                            Changes the line color of the series with the given color. The color should be a number and not a string. However you can use hexadecimal values like 0xFFFFFF (white color) (and without quotation marks) to improve readability of your code                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">Series:setLineWidth(w)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">w</span><span class="param-type">number</span>
+                                </div>
+                                <div class="description">
+                                    The width of the series
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Sets the width of the line of the series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            LineChart class defines fields and methods to deal with Series and other LineChart properties
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart.init()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Initializes all the line charts
+                        </div>
+                        <div class="full">
+                            Here initializing means adding a physical object away from the visible area of the map. This is to ensure all the joints are working properly.
+        <b>NOTE: You must call this method in each new game</b>                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart.handleClick(id, n, call)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">id</span><span class="param-type">integer</span>
+                                </div>
+                                <div class="description">
+                                    The ID of the data point (text area)
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">n</span><span class="param-type">string</span>
+                                </div>
+                                <div class="description">
+                                    The name of the player
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">call</span><span class="param-type">string</span>
+                                </div>
+                                <div class="description">
+                                    Event callback
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            This method handles click events to display data labels
+                        </div>
+                        <div class="full">
+                            There is no need to manually call this method inside your code. You need to just insert this inside the eventTextAreaCallback method
+        <b><i>Example</i></b>
+        <pre><code>
+            ...
+
+            function eventTextAreaCallback(id, n, call)
+                LineChart.handleclicks(id, n, call)
+            end
+
+            ...
+        </code></pre>
+
+        This method usually triggers when a player click a data label                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart.new(id, x, y, w, h)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">id</span><span class="param-type">any</span>
+                                </div>
+                                <div class="description">
+                                    The unique ID of the LineChart
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">x</span><span class="param-type">integer</span>
+                                </div>
+                                <div class="description">
+                                    The x position of the chart
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">y</span><span class="param-type">integer</span>
+                                </div>
+                                <div class="description">
+                                    The y position of the chart
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">w</span><span class="param-type">integer</span>
+                                </div>
+                                <div class="description">
+                                    The width of the chart
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">h</span><span class="param-type">integer</span>
+                                </div>
+                                <div class="description">
+                                    The height of th chart
+                                </div>
+                            </div>
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">LineChart</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        A new LineChart instance    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns a new LineChart instance with the provided configuration
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:getID()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">The</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        ID of the chart    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            any Returns the ID of the chart
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:getDimension()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">table</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        The dimension of the chart    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the x,y,w,h properties / dimensions of the chart
+                        </div>
+                        <div class="full">
+                            Return the dimension of the chart as a table. The dimensions of the chart can be accessed by the following keys
+        <ul>
+            <li>x</li>
+            <li>y</li>
+            <li>w</li>
+            <li>h</li>
+        </ul>
+        The above keys are relevant to the x position, y position, width and height of the chart respectively.                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:getMinX()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">integer</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        The minimum X value    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the minimum X value of all the series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:getMaxX()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">integer</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        The maximum X value    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the maximum X value of all the series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
                 </div></div></div>
                         </div>
                         <div id="powered-by">
