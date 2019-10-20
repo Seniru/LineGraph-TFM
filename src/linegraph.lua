@@ -409,10 +409,64 @@ function LineChart:getMinX() return self.minX end
     @brief Returns the maximum X value of all the series
 --]====]
 function LineChart:getMaxX() return self.maxX end
+
+--[====[
+    @type func
+    @name LineChart:getMinY()
+    @return number The minimum Y value of all the series
+    @brief Return the minimum Y value of all the series
+--]====]
 function LineChart:getMinY() return self.minY end
-function LineChart:getMaxY() return self.maxY end
+
+--[====[
+    @type func
+    @name LineChart:getMaxX()
+    @return number The maximum X value of all the series
+    @brief Returns the maximum X value of all the series
+--]====]
+function LineChart:getMaxY() return self.maxY
+
+--[====[
+    @type func
+    @name LineChart:getXRange()
+    @return number The X range of all the series
+    @brief Returns the X range of all the series
+    @description [
+        The X range is calculated as follows
+        <pre>
+            x range = maxX() - minX()
+        </pre>
+    ]
+--]====]
 function LineChart:getXRange() return self.xRange end
+
+--[====[
+    @type func
+    @name LineChart:getYRange()
+    @return number The Y range of all the series
+    @description [
+        The Y range is calculated as follows
+        <pre>
+            y range = maxY() - minY()
+        </pre>
+    ]
+--]====]
 function LineChart:getYRange() return self.yRange end
+
+--[====[
+    @type func
+    @name LineChart:getGraphColor()
+    @return table A table containing colors of the graph
+    @brief Returns A table containing colors of the graph
+    @description [
+        Return a table which contains the background and the border color of the graph
+        <br>
+        The keys and values relevant to those field are as follows
+        <br>
+        <b>bgColor</b>: (default 0x324650) - The background color<br>
+        <b>borderColor</b>: (default 0x212F36) - The border color<br>
+    ]
+--]====]
 function LineChart:getGraphColor() return { bgColor = self.bg or 0x324650, borderColor = self.border or 0x212F36 } end
 function LineChart:getAlpha() return self.alpha or 0.5 end
 function LineChart:isShowing() return self.showing end
