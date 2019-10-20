@@ -11,7 +11,6 @@ commit_website_files() {
 }
 
 upload_files() {
-  git remote add origin https://github.com/Seniru/LineGraph-TFM.git
   git push --quiet --set-upstream origin
 }
 
