@@ -1,4 +1,4 @@
-name: Build
+name: Build and Deploy
 
 on: [push]
 
@@ -35,6 +35,7 @@ jobs:
     - name: Deploy to github pages
       uses: JamesIves/github-pages-deploy-action@master
       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BASE_BRANCH: master # The branch the action should deploy from.
         BRANCH: master # The branch the action should deploy to.
         FOLDER: build # The folder the action should deploy.
