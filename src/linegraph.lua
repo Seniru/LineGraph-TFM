@@ -444,6 +444,7 @@ function LineChart:getXRange() return self.xRange end
     @type func
     @name LineChart:getYRange()
     @return number The Y range of all the series
+    @brief Returns the Y range of all the series
     @description [
         The Y range is calculated as follows
         <pre>
@@ -468,8 +469,30 @@ function LineChart:getYRange() return self.yRange end
     ]
 --]====]
 function LineChart:getGraphColor() return { bgColor = self.bg or 0x324650, borderColor = self.border or 0x212F36 } end
+
+--[====[
+    @type func
+    @name LineChart:getAlpha()
+    @return number Opacity of the graph
+    @brief Returns the opacity of the graph. Default is 0.5
+--]====]
+
 function LineChart:getAlpha() return self.alpha or 0.5 end
+
+--[====[
+    @type func
+    @name LineChart:isShowing()
+    @return boolean The showing state of the graph
+    @brief Returns true if the graph is visible and otherwise false
+--]====]
 function LineChart:isShowing() return self.showing end
+
+--[====[
+    @type func
+    @name LineChart:getDataLength()
+    @return integer Totl number of data
+    @brief Returns the total number of data in all series
+--]====]
 function LineChart:getDataLength()
   local count = 0
   for _, s in next, self.series do
@@ -478,6 +501,14 @@ function LineChart:getDataLength()
   return count
 end
 
+--[====[
+    @type func
+    @name LineChart:show()
+    @brief Shows the linechart
+    @description [
+        Shows the linechart. You must call this at every new round or after updating the linechart
+    ]
+--]====]
 function LineChart:show()
     self:refresh()
     local floor, ceil = math.floor, math.ceil
@@ -523,25 +554,63 @@ function LineChart:show()
 	self.showing = true
 end
 
-
+--[====[
+    @type func
+    @name LineChart:setGraphColor(bg, border)
+    @param bg:number The color of the background
+    @param border:number The color of the border
+    @brief Sets the color of the grph
+--]====]
 function LineChart:setGraphColor(bg, border)
 	self.bg = bg
 	self.border = border
 end
 
+--[====[
+    @type func
+    @name LineChart:setShowDataPoints(show)
+    @param show:boolean The status of showing data points
+    @brief Shows data points if true
+--]====]
 function LineChart:setShowDataPoints(show)
     self.showDPoints = show
 end
 
+--[====[
+    @type func
+    @name LineChart:setAlpha(alpha)
+    @param alpha:number The opacity
+    @brief Sets the opacity of the graph
+--]====]
 function LineChart:setAlpha(alpha)
 	self.alpha = alpha
 end
 
+--[====[
+    @type func
+    @name LineChart:addSeries(series)
+    @param series:Series The new series
+    @brief Adds a new series to the graph
+    @description [
+        You can use this method to add new series and even support multi series graphs! <br>
+        <b>NOTE: You must call show() method on self to display the updated data</b>
+    ]
+--]====]
 function LineChart:addSeries(series)
   table.insert(self.series, series)
   self:refresh()
 end
 
+--[====[
+    @type func
+    @name LineChart:removeSeries(name)
+    @param name:string The name of the series
+    @brief Removes a series by name
+    @description [
+        Call this method to remove a series from the graph. The <i>name</i> argument is the ID of the series. <br>
+        <b>NOTE: You must call show() method on self to display the updated data</b>
+    ]
+--]====]
 function LineChart:removeSeries(name)
   for i=1, #self.series do
     if self.series[i]:getName() == name then
@@ -552,6 +621,24 @@ function LineChart:removeSeries(name)
   self:refresh()
 end
 
+--[====[
+    @type func
+    @name LineChart:refresh()
+    @brief Refreshes the graph
+    @description [
+        Causes the graph to refresh all of it's values. Useful when a new series is added, removed or altered it's data.
+        The actions happen with this method can be listed as follows<br>
+        <ul>
+            <li>Updating minX</li>
+            <li>Updating maxX</li>
+            <li>Updating minY</li>
+            <li>Updating minX</li>
+            <li>Updating x range</li>
+            <li>Updating y range</li>
+        </ul>
+        You don't need to call this method explicitly as this method is included in related methods
+    ]
+--]====]
 function LineChart:refresh()
   self.minX, self.minY, self.maxX, self.maxY = nil
   for k, s in next, self.series do
@@ -564,16 +651,35 @@ function LineChart:refresh()
     self.yRange = self.maxY - self.minY
 end
 
+--[====[
+    @type func
+    @name LineChart:resize(w, h)
+    @param w:integer New width
+    @param h:integer New height
+    @brief Resizes the graph
+--]====]
 function LineChart:resize(w, h)
 	self.w = w
 	self.h = h
 end
 
+--[====[
+    @type func
+    @name LineChart:move(x, y)
+    @param x:integer New x position
+    @param y:integer New y position
+    @brief Moves the graph
+--]====]
 function LineChart:move(x, y)
 	self.x = x
 	self.y = y
 end
 
+--[====[
+    @type func
+    @name LineChart:hide()
+    @brief Hides the graph and all it's series
+--]====]
 function LineChart:hide()
 	for id = 10000, 17000, 1000 do
 		ui.removeTextArea(id + self.id)
@@ -587,6 +693,15 @@ function LineChart:hide()
 	self.showing = false
 end
 
+--[====[
+    @type func
+    @name LineChart:showLabels(show)
+    @param show:boolean The show state of the labels
+    @brief Shows or hide the labels
+    @description [
+        This method shows the names and colors of the series at the right side of the chart. This method is very useful when dealing with multi-series graphs
+    ]
+--]====]
 function LineChart:showLabels(show)
   if show or show == nil then
   local labels = ""
@@ -599,6 +714,15 @@ function LineChart:showLabels(show)
   end
 end
 
+--[====[
+    @type func
+    @name LineChart:displayGrids(show)
+    @param show:boolean The show state of the grids
+    @brief Shows or hide the grids
+    @description [
+        Calling this method with true for the show parameter would add grids to the graph.
+    ]
+--]====]
 function LineChart:displayGrids(show)
     if show or show == nil then
         local interval = self.h / 5
