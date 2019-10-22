@@ -38,4 +38,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BASE_BRANCH: master # The branch the action should deploy from.
         BRANCH: master # The branch the action should deploy to.
-        FOLDER: '' # The folder the action should deploy.
+        FOLDER: 'docs' # The folder the action should deploy.
