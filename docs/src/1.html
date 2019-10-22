@@ -1189,7 +1189,7 @@ body * {
                              
                     <div class="description">
                         <div class="brief">
-                            null
+                            Returns the Y range of all the series
                         </div>
                         <div class="full">
                             The Y range is calculated as follows
@@ -1227,6 +1227,384 @@ body * {
         <br>
         <b>bgColor</b>: (default 0x324650) - The background color<br>
         <b>borderColor</b>: (default 0x212F36) - The border color<br>                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:getAlpha()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">number</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        Opacity of the graph    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the opacity of the graph. Default is 0.5
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:isShowing()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">boolean</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        The showing state of the graph    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns true if the graph is visible and otherwise false
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:getDataLength()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                               <div class="return">
+                                    <div class="return-type">
+                                        <span class="return-title">Return</span>
+                                        <span class="return-type-title">integer</span>
+                                    </div>
+                                    <div class="return-desc">
+                                        Totl number of data    
+                                    </div>
+                                </div>
+                             
+                    <div class="description">
+                        <div class="brief">
+                            Returns the total number of data in all series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:show()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Shows the linechart
+                        </div>
+                        <div class="full">
+                            Shows the linechart. You must call this at every new round or after updating the linechart                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:setGraphColor(bg, border)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">bg</span><span class="param-type">number</span>
+                                </div>
+                                <div class="description">
+                                    The color of the background
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">border</span><span class="param-type">number</span>
+                                </div>
+                                <div class="description">
+                                    The color of the border
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Sets the color of the grph
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:setShowDataPoints(show)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">show</span><span class="param-type">boolean</span>
+                                </div>
+                                <div class="description">
+                                    The status of showing data points
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Shows data points if true
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:setAlpha(alpha)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">alpha</span><span class="param-type">number</span>
+                                </div>
+                                <div class="description">
+                                    The opacity
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Sets the opacity of the graph
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:addSeries(series)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">series</span><span class="param-type">Series</span>
+                                </div>
+                                <div class="description">
+                                    The new series
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Adds a new series to the graph
+                        </div>
+                        <div class="full">
+                            You can use this method to add new series and even support multi series graphs! <br>
+        <b>NOTE: You must call show() method on self to display the updated data</b>                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:removeSeries(name)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">name</span><span class="param-type">string</span>
+                                </div>
+                                <div class="description">
+                                    The name of the series
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Removes a series by name
+                        </div>
+                        <div class="full">
+                            Call this method to remove a series from the graph. The <i>name</i> argument is the ID of the series. <br>
+        <b>NOTE: You must call show() method on self to display the updated data</b>                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:refresh()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Refreshes the graph
+                        </div>
+                        <div class="full">
+                            Causes the graph to refresh all of it's values. Useful when a new series is added, removed or altered it's data.
+        The actions happen with this method can be listed as follows<br>
+        <ul>
+            <li>Updating minX</li>
+            <li>Updating maxX</li>
+            <li>Updating minY</li>
+            <li>Updating minX</li>
+            <li>Updating x range</li>
+            <li>Updating y range</li>
+        </ul>
+        You don't need to call this method explicitly as this method is included in related methods                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:resize(w, h)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">w</span><span class="param-type">integer</span>
+                                </div>
+                                <div class="description">
+                                    New width
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">h</span><span class="param-type">integer</span>
+                                </div>
+                                <div class="description">
+                                    New height
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Resizes the graph
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:move(x, y)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">x</span><span class="param-type">integer</span>
+                                </div>
+                                <div class="description">
+                                    New x position
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">y</span><span class="param-type">integer</span>
+                                </div>
+                                <div class="description">
+                                    New y position
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Moves the graph
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:hide()</div>
+                    </div>
+                    <div class="params">
+                        
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Hides the graph and all it's series
+                        </div>
+                        <div class="full">
+                                                    
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:showLabels(show)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">show</span><span class="param-type">boolean</span>
+                                </div>
+                                <div class="description">
+                                    The show state of the labels
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Shows or hide the labels
+                        </div>
+                        <div class="full">
+                            This method shows the names and colors of the series at the right side of the chart. This method is very useful when dealing with multi-series graphs                        
+                        </div>
+                    </div>
+                </div><div class="item">
+                    <div class="top">
+                        <div class="name">LineChart:displayGrids(show)</div>
+                    </div>
+                    <div class="params">
+                        
+                            <div class="item">
+                                <div class="name">
+                                    <span class="param-name">show</span><span class="param-type">boolean</span>
+                                </div>
+                                <div class="description">
+                                    The show state of the grids
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div class="description">
+                        <div class="brief">
+                            Shows or hide the grids
+                        </div>
+                        <div class="full">
+                            Calling this method with true for the show parameter would add grids to the graph.                        
                         </div>
                     </div>
                 </div></div></div>
