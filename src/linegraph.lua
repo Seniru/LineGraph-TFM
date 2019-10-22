@@ -424,7 +424,7 @@ function LineChart:getMinY() return self.minY end
     @return number The maximum X value of all the series
     @brief Returns the maximum X value of all the series
 --]====]
-function LineChart:getMaxY() return self.maxY
+function LineChart:getMaxY() return self.maxY end
 
 --[====[
     @type func
