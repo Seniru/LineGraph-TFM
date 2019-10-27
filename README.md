@@ -7,7 +7,7 @@
  <br> 
    <a href='https://github.com/Seniru/LineGraph-TFM/actions'><img alt='Build status' src='https://github.com/Seniru/LineGraph-TFM/workflows/Build%20and%20Deploy/badge.svg'></a>
    <a href='#contributors'><img src='https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square' alt='All Contributors'></a>
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Seniru/LineGraph-TFM">
+  <img alt="GitHub file size in bytes" src="https://img.shields.io/github/size/Seniru/LineGraph-TFM/src/linegraph.min.lua?label=Code%20size%20%28min%29">
   <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/Seniru/LineGraph-TFM?sort=semver">
   <a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/License-MIT-yellow.svg' alt='License'></a><br> 
 </p>
