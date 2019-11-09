@@ -23,6 +23,7 @@ jobs:
         CI: true
     - name: Commit files
       run: |
+        echo ${{ github.ref }}
         git add .
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
