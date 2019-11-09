@@ -29,5 +29,6 @@ jobs:
         git commit -m "ci: Automated build push" -a | exit 0
     - name: Push changes
       uses: ad-m/github-push-action@master
+      if: github.ref == "master"
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
