@@ -20,7 +20,7 @@ jobs:
         npm run build
         npm run make:docs
       env:
-        CI: true        
+        CI: true
     - name: Commit files
       run: |
         git add .
@@ -31,4 +31,3 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    
