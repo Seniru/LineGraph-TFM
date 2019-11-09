@@ -6,6 +6,7 @@
  Lite, Reusable and customizable line charts for Transformice!
  <br> 
    <a href='https://github.com/Seniru/LineGraph-TFM/actions'><img alt='Build status' src='https://github.com/Seniru/LineGraph-TFM/workflows/Build%20and%20Deploy/badge.svg'></a>
+   <a href="https://www.codefactor.io/repository/github/seniru/linegraph-tfm"><img src="https://www.codefactor.io/repository/github/seniru/linegraph-tfm/badge" alt="CodeFactor" /></a>
    <a href='#contributors'><img src='https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square' alt='All Contributors'></a>
   <img alt="GitHub file size in bytes" src="https://img.shields.io/github/size/Seniru/LineGraph-TFM/src/linegraph.min.lua?label=Code%20size%20%28min%29">
   <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/Seniru/LineGraph-TFM?sort=semver">
