@@ -1,7 +1,8 @@
 
 
-<h1 align='center'>LineGraph-TFM</h1>
-<p align='center'><a href="https://ibb.co/d2vWYHC"><img src="https://i.ibb.co/cF9gnsf/graph.png" alt="graph" border="0" width="90%" height="250"></a></p>
+<p align='center'>
+	<img src='linechart.png'>
+</p>
 <p align='center'> 
  Lite, Reusable and customizable line charts for Transformice!
  <br> 
