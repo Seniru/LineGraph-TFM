@@ -6,12 +6,12 @@
 <p align='center'> 
  Lite, Reusable and customizable line charts for Transformice!
  <br> 
-   <a href='https://github.com/Seniru/LineGraph-TFM/actions'><img alt='Build status' src='https://github.com/Seniru/LineGraph-TFM/workflows/Build%20and%20Deploy/badge.svg'></a>
-   <a href="https://www.codefactor.io/repository/github/seniru/linegraph-tfm"><img src="https://www.codefactor.io/repository/github/seniru/linegraph-tfm/badge" alt="CodeFactor" /></a>
+   <a href='https://github.com/Seniru/LineGraph-TFM/actions'><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/Seniru/LineGraph-TFM/Build and Deploy?logo=github&style=flat-square"></a>
+   <a href="https://www.codefactor.io/repository/github/seniru/linegraph-tfm"><img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/Seniru/LineGraph-TFM?logo=codefactor&style=flat-square"></a>
    <a href='#contributors'><img src='https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square' alt='All Contributors'></a>
-  <img alt="GitHub file size in bytes" src="https://img.shields.io/github/size/Seniru/LineGraph-TFM/src/linegraph.min.lua?label=Code%20size%20%28min%29">
-  <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/Seniru/LineGraph-TFM?sort=semver">
-  <a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/License-MIT-yellow.svg' alt='License'></a><br> 
+  <img alt="GitHub file size in bytes" src="https://img.shields.io/github/size/Seniru/LineGraph-TFM/src/linegraph.min.lua?label=Code%20size%20%28min%29&style=flat-square">
+  <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/Seniru/LineGraph-TFM?sort=semver&style=flat-square">
+  <a href='https://opensource.org/licenses/MIT'><img alt="GitHub" src="https://img.shields.io/github/license/Seniru/LineGraph-TFM?style=flat-square"></a><br> 
 </p>
 
 ### Features
