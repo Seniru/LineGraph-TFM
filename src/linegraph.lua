@@ -335,7 +335,7 @@ function LineChart.handleClick(id, n, call)
     if call:sub(0, ("lchart:data:["):len()) == 'lchart:data:[' then
         local cdata = split(call:sub(("lchart:data:["):len() + 1, -2), ",")
         local cx, cy, cdx, cdy = split(cdata[1], ":")[2], split(cdata[2], ":")[2], split(cdata[3], ":")[2], split(cdata[4], ":")[2]
-        ui.addTextArea(18000, "<a href='event:close'>X: " .. cdx .. "<br>Y: " ..cdy .. "</a>", n, cx, cy, 80, 30, nil, nil, 0.5, true)
+        ui.addTextArea(18000, "<a href='event:close'>X: " .. cdx .. "<br>Y: " ..cdy .. "</a>", n, cx, cy, 80, 30, nil, nil, 0.5, false)
     elseif call == "close" then
         ui.removeTextArea(id)
     end
@@ -513,17 +513,17 @@ function LineChart:show()
     self:refresh()
     local floor, ceil = math.floor, math.ceil
 	--the graph plot
-	ui.addTextArea(10000 + self.id, "", nil, self.x, self.y, self.w, self.h, self.bg, self.border, self:getAlpha(), true)
+	ui.addTextArea(10000 + self.id, "", nil, self.x, self.y, self.w, self.h, self.bg, self.border, self:getAlpha(), false)
 	--label of the origin
-	ui.addTextArea(11000 + self.id, "<b>[" .. floor(self.minX) .. ", "  .. floor(self.minY) .. "]</b>", nil, self.x - 15, self.y + self.h + 5, 50, 50, nil, nil, 0, true)
+	ui.addTextArea(11000 + self.id, "<b>[" .. floor(self.minX) .. ", "  .. floor(self.minY) .. "]</b>", nil, self.x - 15, self.y + self.h + 5, 50, 50, nil, nil, 0, false)
 	--label of the x max
-	ui.addTextArea(12000 + self.id, "<b>" .. ceil(self.maxX) .. "</b>", nil, self.x + self.w + 10, self.y + self.h + 5, 50, 50, nil, nil, 0, true)
+	ui.addTextArea(12000 + self.id, "<b>" .. ceil(self.maxX) .. "</b>", nil, self.x + self.w + 10, self.y + self.h + 5, 50, 50, nil, nil, 0, false)
 	--label of the y max
-	ui.addTextArea(13000 + self.id, "<b>" .. ceil(self.maxY) .. "</b>", nil, self.x - 15, self.y - 10, 50, 50, nil, nil, 0, true)
+	ui.addTextArea(13000 + self.id, "<b>" .. ceil(self.maxY) .. "</b>", nil, self.x - 15, self.y - 10, 50, 50, nil, nil, 0, false)
 	--label x median
-	ui.addTextArea(14000 + self.id, "<b>" .. ceil((self.maxX + self.minX) / 2) .. "</b>", nil, self.x + self.w / 2, self.y + self.h + 5, 50, 50, nil, nil, 0, true)
+	ui.addTextArea(14000 + self.id, "<b>" .. ceil((self.maxX + self.minX) / 2) .. "</b>", nil, self.x + self.w / 2, self.y + self.h + 5, 50, 50, nil, nil, 0, false)
 	--label y median
-	ui.addTextArea(15000 + self.id, "<br><br><b>" .. ceil((self.maxY + self.minY) / 2) .. "</b>", nil, self.x - 15, self.y + (self.h - self.y) / 2, 50, 50, nil, nil, 0, true)
+	ui.addTextArea(15000 + self.id, "<br><br><b>" .. ceil((self.maxY + self.minY) / 2) .. "</b>", nil, self.x - 15, self.y + (self.h - self.y) / 2, 50, 50, nil, nil, 0, false)
 
 	local joints = self.joints
 	local xRatio = self.w / self.xRange
@@ -545,7 +545,7 @@ function LineChart:show()
 			foreground=true
         })
         if self.showDPoints then
-            ui.addTextArea(16000 + self.id + joints, "<font color='#" .. num2hex(series:getColor()) .."'><a href='event:lchart:data:[x:" .. x1 .. ",y:" .. y1 .. ",dx:" .. series:getDX()[d] .. ",dy:" .. series:getDY()[d] .. "]'>█</a></font>", nil, x1, y1, 10, 10, nil, nil, 0, true)
+            ui.addTextArea(16000 + self.id + joints, "<font color='#" .. num2hex(series:getColor()) .."'><a href='event:lchart:data:[x:" .. x1 .. ",y:" .. y1 .. ",dx:" .. series:getDX()[d] .. ",dy:" .. series:getDY()[d] .. "]'>█</a></font>", nil, x1, y1, 10, 10, nil, nil, 0, false)
         end
 		joints = joints + 1
 	  end
@@ -708,7 +708,7 @@ function LineChart:showLabels(show)
     for _, series in next, self.series do
       labels = labels .. "<font color='#" .. num2hex(series:getColor()) .. "'> ▉<b> " .. series:getName() .. "</b></font><br>"
     end
-    ui.addTextArea(16000 + self.id, labels, nil, self.x + self.w + 15, self.y, 80, 18 * #self.series, self:getGraphColor().bgColor, self:getGraphColor().borderColor, self:getAlpha(), true )
+    ui.addTextArea(16000 + self.id, labels, nil, self.x + self.w + 15, self.y, 80, 18 * #self.series, self:getGraphColor().bgColor, self:getGraphColor().borderColor, self:getAlpha(), false)
   else
     ui.removeTextArea(16000 + self.id, nil)
   end
