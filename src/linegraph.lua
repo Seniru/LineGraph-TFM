@@ -335,9 +335,9 @@ function LineChart.handleClick(id, n, call)
     if call:sub(0, ("lchart:data:["):len()) == 'lchart:data:[' then
         local cdata = split(call:sub(("lchart:data:["):len() + 1, -2), ",")
         local cx, cy, cdx, cdy = split(cdata[1], ":")[2], split(cdata[2], ":")[2], split(cdata[3], ":")[2], split(cdata[4], ":")[2]
-        ui.addTextArea(18000, "<a href='event:close'>X: " .. cdx .. "<br>Y: " ..cdy .. "</a>", n, cx, cy, 80, 30, nil, nil, 0.5, false)
-    elseif call == "close" then
-        ui.removeTextArea(id)
+        ui.addTextArea(18000, "<a href='event:chart_close'>X: " .. cdx .. "<br>Y: " ..cdy .. "</a>", n, cx, cy, 80, 30, nil, nil, 0.5, false)
+    elseif call == "chart_close" then
+        ui.removeTextArea(id, n)
     end
 end
 
@@ -708,7 +708,7 @@ function LineChart:showLabels(show)
     for _, series in next, self.series do
       labels = labels .. "<font color='#" .. num2hex(series:getColor()) .. "'> ▉<b> " .. series:getName() .. "</b></font><br>"
     end
-    ui.addTextArea(16000 + self.id, labels, nil, self.x + self.w + 15, self.y, 80, 18 * #self.series, self:getGraphColor().bgColor, self:getGraphColor().borderColor, self:getAlpha(), false)
+    ui.addTextArea(16000 + self.id, labels, nil, self.x + self.w + 15, self.y, 100, 18 * #self.series, self:getGraphColor().bgColor, self:getGraphColor().borderColor, self:getAlpha(), false)
   else
     ui.removeTextArea(16000 + self.id, nil)
   end
